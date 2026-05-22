@@ -13,6 +13,9 @@ import {
 import { Button } from "./components/ui/button"
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import toast, { Toaster } from 'react-hot-toast';
+
+const notify = () => toast('Here is your toast.');
 
 function App() {
   AOS.init({
@@ -25,6 +28,10 @@ function App() {
   return (
     <>
       <h1>App</h1>
+      <div>
+        <button onClick={notify}>Make me a toast</button>
+        <Toaster />
+      </div>
       <Button variant="default"><i className="fa-solid fa-house"></i> Button</Button>
       <h1 className="text-3xl font-bold underline">
         Hello world!
