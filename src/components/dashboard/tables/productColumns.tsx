@@ -1,6 +1,6 @@
 import { Badge } from '../../ui/badge'
-import type { DataTableColumn } from '../../dashboard/DataTable'
-import { TableActions } from '../../dashboard/TableActions'
+import type { DataTableColumn } from '../DataTable'
+import { TableActions } from '../TableActions'
 import { formatPrice } from '../../../lib/format'
 import type { Product } from '../../products/types'
 

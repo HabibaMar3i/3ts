@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { DashboardPage } from '../../components/dashboard/DashboardPage'
+import { DashboardSection } from '../../components/dashboard/DashboardSection'
 import { DashboardStatCards } from '../../components/dashboard/DashboardStatCards'
 import { DataTable } from '../../components/dashboard/DataTable'
-import { getOrderColumns } from '../../components/vendor/tables/orderColumns'
-import { getPaymentColumns } from '../../components/vendor/tables/paymentColumns'
+import { getOrderColumns } from '../../components/dashboard/tables/orderColumns'
+import { getPaymentColumns } from '../../components/dashboard/tables/paymentColumns'
 import { initialVendorAds } from '../../data/vendor/ads'
 import { initialVendorOrders } from '../../data/vendor/orders'
 import { initialVendorPayments } from '../../data/vendor/payments'
@@ -36,9 +37,8 @@ export default function VendorDashboard() {
                 ]}
             />
 
-            <div className="mt-10 space-y-10">
-                <section>
-                    <h2 className="mb-4 text-lg font-bold text-slate-950">أحدث الطلبات</h2>
+            <div className="mt-10 grid gap-10">
+                <DashboardSection title="أحدث الطلبات">
                     <DataTable
                         data={recentOrders}
                         columns={getOrderColumns()}
@@ -46,17 +46,16 @@ export default function VendorDashboard() {
                         emptyMessage="لا توجد طلبات."
                         minWidth="800px"
                     />
-                </section>
+                </DashboardSection>
 
-                <section>
-                    <h2 className="mb-4 text-lg font-bold text-slate-950">آخر المدفوعات</h2>
+                <DashboardSection title="آخر المدفوعات">
                     <DataTable
                         data={recentPayments}
                         columns={getPaymentColumns()}
                         getRowKey={(row) => row.id}
                         emptyMessage="لا توجد مدفوعات."
                     />
-                </section>
+                </DashboardSection>
             </div>
         </DashboardPage>
     )

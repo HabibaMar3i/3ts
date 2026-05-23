@@ -1,6 +1,6 @@
-import type { DataTableColumn } from '../../dashboard/DataTable'
-import { StatusBadge } from '../../dashboard/StatusBadge'
-import { TableActions } from '../../dashboard/TableActions'
+import type { DataTableColumn } from '../DataTable'
+import { StatusBadge } from '../StatusBadge'
+import { TableActions } from '../TableActions'
 import { formatDate, formatNumber, formatPrice } from '../../../lib/format'
 import type { VendorAd } from '../../../types/vendor'
 

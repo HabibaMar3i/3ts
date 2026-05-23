@@ -1,7 +1,7 @@
 import { DashboardPage } from '../../components/dashboard/DashboardPage'
 import { DashboardStatCards } from '../../components/dashboard/DashboardStatCards'
 import { DataTable } from '../../components/dashboard/DataTable'
-import { getPaymentColumns } from '../../components/vendor/tables/paymentColumns'
+import { getPaymentColumns } from '../../components/dashboard/tables/paymentColumns'
 import { adPayments } from '../../data/vendor/payments'
 import { formatPrice } from '../../lib/format'
 

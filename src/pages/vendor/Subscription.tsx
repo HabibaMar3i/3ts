@@ -1,7 +1,7 @@
 import { DashboardPage } from '../../components/dashboard/DashboardPage'
 import { DataTable } from '../../components/dashboard/DataTable'
 import { SubscriptionPlans } from '../../components/vendor/SubscriptionPlans'
-import { getPaymentColumns } from '../../components/vendor/tables/paymentColumns'
+import { getPaymentColumns } from '../../components/dashboard/tables/paymentColumns'
 import { initialVendorPayments } from '../../data/vendor/payments'
 import { currentPlanId, vendorPlans } from '../../data/vendor/subscription'
 

@@ -1,5 +1,5 @@
-import type { DataTableColumn } from '../../dashboard/DataTable'
-import { StatusBadge } from '../../dashboard/StatusBadge'
+import type { DataTableColumn } from '../DataTable'
+import { StatusBadge } from '../StatusBadge'
 import { formatDate, formatPrice } from '../../../lib/format'
 import type { VendorPayment } from '../../../types/vendor'
 

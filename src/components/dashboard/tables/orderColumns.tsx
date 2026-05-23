@@ -1,10 +1,15 @@
-import type { DataTableColumn } from '../../dashboard/DataTable'
-import { StatusBadge } from '../../dashboard/StatusBadge'
+import type { DataTableColumn } from '../DataTable'
+import { StatusBadge } from '../StatusBadge'
+import { TableActions } from '../TableActions'
 import { formatDate, formatPrice } from '../../../lib/format'
 import type { VendorOrder } from '../../../types/vendor'
 
-export function getOrderColumns(): DataTableColumn<VendorOrder>[] {
-    return [
+interface OrderColumnHandlers {
+    onDelete?: (id: number) => void
+}
+
+export function getOrderColumns(handlers?: OrderColumnHandlers): DataTableColumn<VendorOrder>[] {
+    const columns: DataTableColumn<VendorOrder>[] = [
         {
             key: 'id',
             header: 'رقم الطلب',
@@ -36,4 +41,14 @@ export function getOrderColumns(): DataTableColumn<VendorOrder>[] {
             cell: (row) => <StatusBadge status={row.status} />,
         },
     ]
+
+    if (handlers?.onDelete) {
+        columns.push({
+            key: 'actions',
+            header: 'إجراءات',
+            cell: (row) => <TableActions onDelete={() => handlers.onDelete!(row.id)} />,
+        })
+    }
+
+    return columns
 }
