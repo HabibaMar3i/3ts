@@ -4,7 +4,7 @@ import { adminNavItems } from '../config/dashboardNav'
 
 export default function AdminLayout() {
     return (
-        <div className="min-h-screen bg-slate-50" dir="rtl">
+        <div className="min-h-screen bg-background" dir="rtl">
             <div className="flex min-h-screen flex-col lg:flex-row">
                 <DashboardSidebar
                     title="لوحة الإدارة"

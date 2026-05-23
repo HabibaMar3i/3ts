@@ -1,6 +1,6 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
-import { Button } from '../ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { useEffect, useState, type FormEvent } from 'react'
+import { FormCard } from '../dashboard/FormCard'
+import { FormField } from '../dashboard/FormField'
 import { Input } from '../ui/input'
 import type { Product } from '../products/types'
 
@@ -52,94 +52,62 @@ export function VendorProductForm({
     }
 
     return (
-        <Card className="border-slate-200">
-            <CardHeader>
-                <CardTitle className="text-lg">{submitLabel}</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
-                    <Field label="اسم المنتج">
-                        <Input
-                            value={values.name}
-                            onChange={(e) => setValues((prev) => ({ ...prev, name: e.target.value }))}
-                            required
-                        />
-                    </Field>
-                    <Field label="التصنيف">
-                        <Input
-                            value={values.category}
-                            onChange={(e) => setValues((prev) => ({ ...prev, category: e.target.value }))}
-                            required
-                        />
-                    </Field>
-                    <Field label="السعر">
-                        <Input
-                            type="number"
-                            min={0}
-                            step="0.01"
-                            value={values.price}
-                            onChange={(e) => setValues((prev) => ({ ...prev, price: Number(e.target.value) }))}
-                            required
-                        />
-                    </Field>
-                    <Field label="التقييم">
-                        <Input
-                            type="number"
-                            min={0}
-                            max={5}
-                            step="0.1"
-                            value={values.rating}
-                            onChange={(e) => setValues((prev) => ({ ...prev, rating: Number(e.target.value) }))}
-                            required
-                        />
-                    </Field>
-                    <Field label="رابط الصورة" className="sm:col-span-2">
-                        <Input
-                            value={values.image}
-                            onChange={(e) => setValues((prev) => ({ ...prev, image: e.target.value }))}
-                            required
-                        />
-                    </Field>
-                    <Field label="الوصف" className="sm:col-span-2">
-                        <Input
-                            value={values.description ?? ''}
-                            onChange={(e) => setValues((prev) => ({ ...prev, description: e.target.value }))}
-                        />
-                    </Field>
-                    <Field label="شارة (اختياري)">
-                        <Input
-                            value={values.badge ?? ''}
-                            onChange={(e) => setValues((prev) => ({ ...prev, badge: e.target.value }))}
-                            placeholder="جديد / مفضل"
-                        />
-                    </Field>
-                    <div className="flex items-end gap-3 sm:col-span-2">
-                        <Button type="submit" className="rounded-full">
-                            {submitLabel}
-                        </Button>
-                        <Button type="button" variant="outline" className="rounded-full" onClick={onCancel}>
-                            إلغاء
-                        </Button>
-                    </div>
-                </form>
-            </CardContent>
-        </Card>
-    )
-}
-
-function Field({
-    label,
-    children,
-    className,
-}: {
-    label: string
-    children: ReactNode
-    className?: string
-}) {
-    return (
-        <label className={className}>
-            <span className="mb-1.5 block text-sm font-medium text-slate-700">{label}</span>
-            {children}
-        </label>
+        <FormCard title={submitLabel} submitLabel={submitLabel} onSubmit={handleSubmit} onCancel={onCancel}>
+            <FormField label="اسم المنتج">
+                <Input
+                    value={values.name}
+                    onChange={(e) => setValues((prev) => ({ ...prev, name: e.target.value }))}
+                    required
+                />
+            </FormField>
+            <FormField label="التصنيف">
+                <Input
+                    value={values.category}
+                    onChange={(e) => setValues((prev) => ({ ...prev, category: e.target.value }))}
+                    required
+                />
+            </FormField>
+            <FormField label="السعر">
+                <Input
+                    type="number"
+                    min={0}
+                    step="0.01"
+                    value={values.price}
+                    onChange={(e) => setValues((prev) => ({ ...prev, price: Number(e.target.value) }))}
+                    required
+                />
+            </FormField>
+            <FormField label="التقييم">
+                <Input
+                    type="number"
+                    min={0}
+                    max={5}
+                    step="0.1"
+                    value={values.rating}
+                    onChange={(e) => setValues((prev) => ({ ...prev, rating: Number(e.target.value) }))}
+                    required
+                />
+            </FormField>
+            <FormField label="رابط الصورة" className="sm:col-span-2">
+                <Input
+                    value={values.image}
+                    onChange={(e) => setValues((prev) => ({ ...prev, image: e.target.value }))}
+                    required
+                />
+            </FormField>
+            <FormField label="الوصف" className="sm:col-span-2">
+                <Input
+                    value={values.description ?? ''}
+                    onChange={(e) => setValues((prev) => ({ ...prev, description: e.target.value }))}
+                />
+            </FormField>
+            <FormField label="شارة (اختياري)">
+                <Input
+                    value={values.badge ?? ''}
+                    onChange={(e) => setValues((prev) => ({ ...prev, badge: e.target.value }))}
+                    placeholder="جديد / مفضل"
+                />
+            </FormField>
+        </FormCard>
     )
 }

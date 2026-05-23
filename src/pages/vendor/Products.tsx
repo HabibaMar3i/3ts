@@ -1,20 +1,20 @@
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import { DashboardPageHeader } from '../../components/dashboard/DashboardPageHeader'
+import { DashboardPage } from '../../components/dashboard/DashboardPage'
+import { DataTable } from '../../components/dashboard/DataTable'
 import { VendorProductForm, type VendorProductFormValues } from '../../components/vendor/VendorProductForm'
-import { VendorProductTable } from '../../components/vendor/VendorProductTable'
+import { getProductColumns } from '../../components/vendor/tables/productColumns'
 import { Button } from '../../components/ui/button'
 import { initialVendorProducts } from '../../data/vendorProducts'
+import { useLocalCrud } from '../../hooks/useLocalCrud'
 import type { Product } from '../../components/products/types'
 
 type FormMode = 'closed' | 'create' | 'edit'
 
 export default function VendorProducts() {
-    const [products, setProducts] = useState<Product[]>(initialVendorProducts)
+    const { items: products, create, update, remove } = useLocalCrud<Product>(initialVendorProducts)
     const [formMode, setFormMode] = useState<FormMode>('closed')
     const [editingProduct, setEditingProduct] = useState<Product | null>(null)
-
-    const nextId = () => Math.max(0, ...products.map((product) => product.id)) + 1
 
     const closeForm = () => {
         setFormMode('closed')
@@ -22,70 +22,59 @@ export default function VendorProducts() {
     }
 
     const handleCreate = (values: VendorProductFormValues) => {
-        setProducts((prev) => [...prev, { id: nextId(), ...values }])
+        create(values)
         closeForm()
     }
 
     const handleUpdate = (values: VendorProductFormValues) => {
         if (!editingProduct) return
-        setProducts((prev) =>
-            prev.map((product) => (product.id === editingProduct.id ? { ...product, ...values } : product))
-        )
+        update(editingProduct.id, values)
         closeForm()
     }
 
     const handleDelete = (id: number) => {
-        if (!window.confirm('هل تريد حذف هذا المنتج؟')) return
-        setProducts((prev) => prev.filter((product) => product.id !== id))
+        if (!remove(id, 'هل تريد حذف هذا المنتج؟')) return
         if (editingProduct?.id === id) closeForm()
     }
 
-    const startEdit = (product: Product) => {
-        setEditingProduct(product)
-        setFormMode('edit')
-    }
-
     return (
-        <div className="p-4 sm:p-6 lg:p-8">
-            <DashboardPageHeader
-                title="إدارة المنتجات"
-                description="أضف منتجاتك وعدّلها أو احذفها من هنا."
-                action={
-                    formMode === 'closed' ? (
-                        <Button
-                            type="button"
-                            className="gap-2 rounded-full"
-                            onClick={() => setFormMode('create')}
-                        >
-                            <Plus size={18} />
-                            إضافة منتج
-                        </Button>
-                    ) : null
-                }
-            />
-
+        <DashboardPage
+            title="إدارة المنتجات"
+            description="أضف منتجاتك وعدّلها أو احذفها من هنا."
+            action={
+                formMode === 'closed' ? (
+                    <Button type="button" className="gap-2" onClick={() => setFormMode('create')}>
+                        <Plus size={18} />
+                        إضافة منتج
+                    </Button>
+                ) : null
+            }
+        >
             {formMode === 'create' ? (
-                <div className="mb-8">
-                    <VendorProductForm
-                        submitLabel="حفظ المنتج"
-                        onSubmit={handleCreate}
-                        onCancel={closeForm}
-                    />
-                </div>
+                <VendorProductForm submitLabel="حفظ المنتج" onSubmit={handleCreate} onCancel={closeForm} />
             ) : null}
 
             {formMode === 'edit' && editingProduct ? (
-                <div className="mb-8">
-                    <VendorProductForm
-                        initialValues={editingProduct}
-                        submitLabel="تحديث المنتج"
-                        onSubmit={handleUpdate}
-                        onCancel={closeForm}
-                    />
-                </div>
+                <VendorProductForm
+                    initialValues={editingProduct}
+                    submitLabel="تحديث المنتج"
+                    onSubmit={handleUpdate}
+                    onCancel={closeForm}
+                />
             ) : null}
 
-            <VendorProductTable products={products} onEdit={startEdit} onDelete={handleDelete} />
-        </div>
+            <DataTable
+                data={products}
+                columns={getProductColumns({
+                    onEdit: (product) => {
+                        setEditingProduct(product)
+                        setFormMode('edit')
+                    },
+                    onDelete: handleDelete,
+                })}
+                getRowKey={(row) => row.id}
+                emptyMessage="لا توجد منتجات بعد. أضف أول منتج من الزر أعلاه."
+            />
+        </DashboardPage>
     )
 }

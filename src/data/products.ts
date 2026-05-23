@@ -60,6 +60,4 @@ export function getRelatedProducts(product: Product, limit = 3): Product[] {
         .slice(0, limit)
 }
 
-export function formatPrice(price: number): string {
-    return price.toLocaleString('ar-EG', { style: 'currency', currency: 'EGP' })
-}
+export { formatPrice } from '../lib/format'

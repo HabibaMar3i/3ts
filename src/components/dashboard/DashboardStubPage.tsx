@@ -1,5 +1,6 @@
-import { DashboardPageHeader } from './DashboardPageHeader'
-import { Card, CardContent } from '../ui/card'
+import { Info } from 'lucide-react'
+import { DashboardPage } from './DashboardPage'
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 
 interface DashboardStubPageProps {
     title: string
@@ -8,13 +9,12 @@ interface DashboardStubPageProps {
 
 export function DashboardStubPage({ title, description }: DashboardStubPageProps) {
     return (
-        <div className="p-4 sm:p-6 lg:p-8">
-            <DashboardPageHeader title={title} description={description} />
-            <Card className="border-slate-200">
-                <CardContent className="p-8 text-center text-sm text-slate-600">
-                    هذه الصفحة قيد التطوير.
-                </CardContent>
-            </Card>
-        </div>
+        <DashboardPage title={title} description={description}>
+            <Alert>
+                <Info className="size-4" />
+                <AlertTitle>قيد التطوير</AlertTitle>
+                <AlertDescription>هذه الصفحة قيد التطوير.</AlertDescription>
+            </Alert>
+        </DashboardPage>
     )
 }
