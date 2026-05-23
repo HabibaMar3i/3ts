@@ -55,11 +55,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app-shell">
-        <div className="toast-button-wrapper">
-          <button onClick={notify}>Make me a toast</button>
-          <Toaster />
-        </div>
-
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
