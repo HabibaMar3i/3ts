@@ -14,7 +14,7 @@ export default function Cart() {
             name: 'سيارة ديناصور ذكية',
             price: 299.99,
             quantity: 2,
-            image: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=400&h=400&fit=crop',
+            image: 'https://hedeya.com/cdn/shop/files/51ipoogjgpl-photoroom_1.jpg?v=1764661945&width=360?w=400&h=400&fit=crop',
             category: 'سيارات',
         },
         {
@@ -22,7 +22,7 @@ export default function Cart() {
             name: 'مجموعة مكعبات بناء 500 قطعة',
             price: 149.99,
             quantity: 1,
-            image: 'https://images.unsplash.com/photo-1594787318286-3d835c1cab83?w=400&h=400&fit=crop',
+            image: 'https://hedeya.com/cdn/shop/files/61cueyvkz0l._ac_sl1500.jpg?v=1764652370&width=360?w=400&h=400&fit=crop',
             category: 'بناء',
         },
         {
@@ -30,7 +30,7 @@ export default function Cart() {
             name: 'دراجة هوائية للأطفال',
             price: 499.99,
             quantity: 1,
-            image: 'https://images.unsplash.com/photo-1578702746067-f764ba69be67?w=400&h=400&fit=crop',
+            image: 'https://hedeya.com/cdn/shop/files/588da_multi_blocks_92_parca.jpg?v=1764651688&width=360?w=400&h=400&fit=crop',
             category: 'رياضة',
         },
         {
@@ -38,7 +38,7 @@ export default function Cart() {
             name: 'لعبة روبوت تفاعلي',
             price: 399.99,
             quantity: 1,
-            image: 'https://images.unsplash.com/photo-1611095461304-5d9caa8f5eab?w=400&h=400&fit=crop',
+            image: 'https://hedeya.com/cdn/shop/files/7233886dfcaf6e8485cd0dc5320eb8f2dc32a6f7.jpg?v=1764570447&width=360?w=400&h=400&fit=crop',
             category: 'إلكترونيات',
         },
     ]
