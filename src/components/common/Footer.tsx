@@ -194,7 +194,7 @@ export default function Footer() {
 
                 {/* Trust Badges Section */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/30 transition-colors">
+                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/50 transition-colors">
                             <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-600/10">
                                 <Truck size={24} className="text-red-600" />
                             </div>
@@ -204,7 +204,7 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/30 transition-colors">
+                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/50 transition-colors">
                             <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-600/10">
                                 <CreditCard size={24} className="text-red-600" />
                             </div>
@@ -214,7 +214,7 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/30 transition-colors">
+                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/50 transition-colors">
                             <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-600/10">
                                 <Shield size={24} className="text-red-600" />
                             </div>
@@ -224,7 +224,7 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/30 transition-colors">
+                        <div className="flex items-center gap-3 p-4 rounded-lg border border-slate-800 bg-slate-900/50 hover:border-red-600/50 transition-colors">
                             <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-red-600/10">
                                 <HelpCircle size={24} className="text-red-600" />
                             </div>
