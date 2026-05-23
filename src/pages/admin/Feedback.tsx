@@ -1,7 +1,5 @@
-export default function Feedback() {
-    return (
-        <div>
-            <h1>Feedback</h1>
-        </div>
-    )
+import { DashboardStubPage } from '../../components/dashboard/DashboardStubPage'
+
+export default function AdminFeedback() {
+    return <DashboardStubPage title="التعليقات" description="مراجعة تعليقات وآراء العملاء." />
 }

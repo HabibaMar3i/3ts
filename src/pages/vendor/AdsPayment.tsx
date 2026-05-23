@@ -1,7 +1,5 @@
-export default function AdsPayment() {
-    return (
-        <div>
-            <h1>Ads Payment</h1>
-        </div>
-    )
+import { DashboardStubPage } from '../../components/dashboard/DashboardStubPage'
+
+export default function VendorAdsPayment() {
+    return <DashboardStubPage title="دفع الإعلانات" description="سجل مدفوعات الإعلانات." />
 }

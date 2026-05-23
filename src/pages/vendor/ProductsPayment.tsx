@@ -1,7 +1,5 @@
-export default function ProductsPayment() {
-    return (
-        <div>
-            <h1>Products Payment</h1>
-        </div>
-    )
+import { DashboardStubPage } from '../../components/dashboard/DashboardStubPage'
+
+export default function VendorProductsPayment() {
+    return <DashboardStubPage title="دفع المنتجات" description="سجل مدفوعات المنتجات." />
 }

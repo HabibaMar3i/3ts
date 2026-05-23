@@ -1,7 +1,5 @@
-export default function Subscription() {
-    return (
-        <div>
-            <h1>Subscription</h1>
-        </div>
-    )
+import { DashboardStubPage } from '../../components/dashboard/DashboardStubPage'
+
+export default function VendorSubscription() {
+    return <DashboardStubPage title="الاشتراك" description="إدارة خطة الاشتراك الخاصة بك." />
 }

@@ -1,7 +1,5 @@
-export default function AdsDashboard() {
-    return (
-        <div>
-            <h1>Ads</h1>
-        </div>
-    )
+import { DashboardStubPage } from '../../components/dashboard/DashboardStubPage'
+
+export default function AdminAds() {
+    return <DashboardStubPage title="الإعلانات" description="إدارة حملات الإعلانات." />
 }

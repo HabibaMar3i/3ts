@@ -24,6 +24,9 @@ import TermsOfService from './pages/TermsOfService'
 import Wishlist from './pages/Wishlist'
 
 import Layout from './layouts/Layout'
+import AdminLayout from './layouts/AdminLayout'
+import VendorLayout from './layouts/VendorLayout'
+
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminAds from './pages/admin/Ads'
 import AdminBlogs from './pages/admin/Blogs'
@@ -69,22 +72,29 @@ function App() {
             <Route path="terms-of-service" element={<TermsOfService />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
-            <Route path="admin" element={<AdminDashboard />} />
-            <Route path="admin/ads" element={<AdminAds />} />
-            <Route path="admin/blogs" element={<AdminBlogs />} />
-            <Route path="admin/feedback" element={<AdminFeedback />} />
-            <Route path="admin/orders" element={<AdminOrders />} />
-            <Route path="admin/products" element={<AdminProducts />} />
-            <Route path="admin/users" element={<AdminUsers />} />
-            <Route path="admin/vendors" element={<AdminVendors />} />
-            <Route path="vendor" element={<VendorDashboard />} />
-            <Route path="vendor/ads" element={<VendorAds />} />
-            <Route path="vendor/ads-payment" element={<VendorAdsPayment />} />
-            <Route path="vendor/products" element={<VendorProducts />} />
-            <Route path="vendor/products-payment" element={<VendorProductsPayment />} />
-            <Route path="vendor/subscription" element={<VendorSubscription />} />
-            <Route path="*" element={<NotFound />} />
           </Route>
+
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="ads" element={<AdminAds />} />
+            <Route path="blogs" element={<AdminBlogs />} />
+            <Route path="feedback" element={<AdminFeedback />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="vendors" element={<AdminVendors />} />
+          </Route>
+
+          <Route path="/vendor" element={<VendorLayout />}>
+            <Route index element={<VendorDashboard />} />
+            <Route path="ads" element={<VendorAds />} />
+            <Route path="ads-payment" element={<VendorAdsPayment />} />
+            <Route path="products" element={<VendorProducts />} />
+            <Route path="products-payment" element={<VendorProductsPayment />} />
+            <Route path="subscription" element={<VendorSubscription />} />
+          </Route>
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </BrowserRouter>
