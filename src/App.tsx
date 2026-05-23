@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-import toast, { Toaster } from 'react-hot-toast'
 
 import About from './pages/About'
 import Cart from './pages/Cart'
@@ -40,8 +39,6 @@ import VendorAdsPayment from './pages/vendor/AdsPayment'
 import VendorProducts from './pages/vendor/Products'
 import VendorProductsPayment from './pages/vendor/ProductsPayment'
 import VendorSubscription from './pages/vendor/Subscription'
-
-const notify = () => toast('Here is your toast.')
 
 function App() {
   useEffect(() => {
