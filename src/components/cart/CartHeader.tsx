@@ -1,4 +1,5 @@
 import { ShoppingBag } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Card } from '../ui/card'
 
 interface CartHeaderProps {
@@ -6,6 +7,8 @@ interface CartHeaderProps {
 }
 
 export function CartHeader({ itemCount }: CartHeaderProps) {
+    const { t } = useTranslation()
+
     return (
         <Card className="border-b border-slate-100 bg-linear-to-b from-white to-slate-50 rounded-none">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
@@ -13,10 +16,10 @@ export function CartHeader({ itemCount }: CartHeaderProps) {
                     <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-red-600/10">
                         <ShoppingBag size={24} className="text-red-600" />
                     </div>
-                    <h1 className="text-3xl font-bold text-slate-950">سلتك</h1>
+                    <h1 className="text-3xl font-bold text-slate-950">{t('cart.title')}</h1>
                 </div>
                 <p className="text-slate-600">
-                    لديك {itemCount} منتجات في السلة
+                    {t('cart.itemCount', { count: itemCount })}
                 </p>
             </div>
         </Card>

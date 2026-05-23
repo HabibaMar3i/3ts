@@ -1,20 +1,23 @@
 ﻿import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Menu, X, Search, ShoppingCart, Heart, Bell, ChevronDown } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
-
-const navLinks = [
-    { name: 'الرئيسية', path: '/' },
-    { name: 'المنتجات', path: '/products', badge: 'جديد' },
-    { name: 'عن الشركة', path: '/about' },
-    { name: 'الخدمات', path: '/services' },
-    { name: 'التواصل', path: '/contact' },
-]
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Navbar() {
+    const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
     const [searchMobile, setSearchMobile] = useState(false)
+
+    const navLinks = [
+        { name: t('nav.home'), path: '/' },
+        { name: t('nav.products'), path: '/products', badge: t('nav.newBadge') },
+        { name: t('nav.about'), path: '/about' },
+        { name: t('nav.services'), path: '/services' },
+        { name: t('nav.contact'), path: '/contact' },
+    ]
 
     return (
         <nav className="sticky top-0 z-50 bg-white">
@@ -34,7 +37,7 @@ export default function Navbar() {
                                 </div>
                                 <div className="hidden sm:flex flex-col">
                                     <p className="text-sm font-bold text-slate-950">3TS</p>
-                                    <p className="text-xs font-medium text-red-600">ألعاب أصلية</p>
+                                    <p className="text-xs font-medium text-red-600">{t('common.brandTagline')}</p>
                                 </div>
                             </div>
                         </Link>
@@ -66,7 +69,7 @@ export default function Navbar() {
                                 <Search size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-600 transition-colors" />
                                 <Input
                                     type="text"
-                                    placeholder="ابحث عن لعبة ..."
+                                    placeholder={t('nav.searchPlaceholder')}
                                     className="w-full rounded-full border-2 border-slate-200 bg-slate-50 px-11 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 transition-all duration-200 focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"
                                 />
                             </div>
@@ -79,16 +82,18 @@ export default function Navbar() {
                                 type="button"
                                 onClick={() => setSearchMobile(!searchMobile)}
                                 className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border-2 border-slate-200 bg-slate-50 text-slate-700 transition-all duration-200 hover:border-red-500 hover:bg-red-50 hover:text-red-600"
-                                aria-label="ابحث"
+                                aria-label={t('nav.search')}
                             >
                                 <Search size={20} />
                             </button>
+
+                            <LanguageSwitcher />
 
                             {/* Notification Bell */}
                             <button
                                 type="button"
                                 className="hidden sm:inline-flex relative h-10 w-10 items-center justify-center rounded-lg border-2 border-slate-200 bg-slate-50 text-slate-700 transition-all duration-200 hover:border-red-500 hover:bg-red-50 hover:text-red-600 group"
-                                aria-label="الإشعارات"
+                                aria-label={t('nav.notifications')}
                             >
                                 <Bell size={20} className="group-hover:animate-pulse" />
                                 <span className="absolute -top-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-red-600 to-red-700 text-[10px] font-bold text-white shadow-lg shadow-red-600/40">
@@ -100,7 +105,7 @@ export default function Navbar() {
                             <Link
                                 to="/wishlist"
                                 className="hidden sm:inline-flex relative h-10 w-10 items-center justify-center rounded-lg border-2 border-slate-200 bg-slate-50 text-slate-700 transition-all duration-200 hover:border-red-500 hover:bg-red-50 hover:text-red-600 group"
-                                aria-label="المفضلة"
+                                aria-label={t('nav.wishlist')}
                             >
                                 <Heart size={20} className="group-hover:fill-red-600 group-hover:scale-110 transition-all" />
                                 <span className="absolute -top-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-r from-red-600 to-red-700 text-[10px] font-bold text-white shadow-lg shadow-red-600/40">
@@ -112,7 +117,7 @@ export default function Navbar() {
                             <Link
                                 to="/cart"
                                 className="hidden sm:inline-flex relative h-10 w-10 items-center justify-center rounded-lg border-2 border-slate-200 bg-slate-50 text-slate-700 transition-all duration-200 hover:border-red-500 hover:bg-red-50 hover:text-red-600 group"
-                                aria-label="السلة"
+                                aria-label={t('nav.cart')}
                             >
                                 <ShoppingCart size={20} className="group-hover:rotate-12 transition-transform" />
                                 <span className="absolute -top-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-[10px] font-bold text-white shadow-lg shadow-red-600/40 font-bold">
@@ -128,14 +133,14 @@ export default function Navbar() {
                                     className="border-2 border-red-600 text-red-600 font-semibold rounded-lg hover:bg-red-50 transition-all"
                                     asChild
                                 >
-                                    <Link to="/login">دخول</Link>
+                                    <Link to="/login">{t('nav.login')}</Link>
                                 </Button>
                                 <Button
                                     size="sm"
                                     className="rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold hover:shadow-lg hover:shadow-red-600/40 transition-all"
                                     asChild
                                 >
-                                    <Link to="/signup">إنشاء حساب</Link>
+                                    <Link to="/signup">{t('nav.signup')}</Link>
                                 </Button>
                             </div>
 
@@ -144,7 +149,7 @@ export default function Navbar() {
                                 type="button"
                                 onClick={() => setIsOpen(!isOpen)}
                                 className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border-2 border-red-600 bg-white text-red-600 shadow-sm transition-all duration-200 hover:bg-red-50"
-                                aria-label="القائمة"
+                                aria-label={t('nav.menu')}
                                 aria-expanded={isOpen}
                             >
                                 {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -161,7 +166,7 @@ export default function Navbar() {
                         <Search size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" />
                         <Input
                             type="text"
-                            placeholder="ابحث..."
+                            placeholder={t('nav.searchPlaceholderShort')}
                             className="w-full rounded-full border-2 border-slate-200 bg-slate-50 px-11 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 transition-all focus:border-red-500 focus:ring-4 focus:ring-red-100"
                             autoFocus
                         />
@@ -202,14 +207,14 @@ export default function Navbar() {
                             className="w-full border-2 border-red-600 text-red-600 font-semibold rounded-lg hover:bg-red-50"
                             asChild
                         >
-                            <Link to="/login">دخول</Link>
+                            <Link to="/login">{t('nav.login')}</Link>
                         </Button>
                         <Button
                             size="sm"
                             className="w-full rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold hover:shadow-lg hover:shadow-red-600/40"
                             asChild
                         >
-                            <Link to="/signup">إنشاء حساب</Link>
+                            <Link to="/signup">{t('nav.signup')}</Link>
                         </Button>
                     </div>
                 </div>

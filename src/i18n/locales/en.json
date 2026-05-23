@@ -1,0 +1,142 @@
+{
+  "common": {
+    "brandTagline": "Original Games",
+    "backToStore": "Back to store",
+    "openMenu": "Open menu",
+    "language": "Language",
+    "arabic": "العربية",
+    "english": "English"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "newBadge": "New",
+    "searchPlaceholder": "Search for a game...",
+    "searchPlaceholderShort": "Search...",
+    "search": "Search",
+    "notifications": "Notifications",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "login": "Login",
+    "signup": "Sign up",
+    "menu": "Menu"
+  },
+  "footer": {
+    "description": "Your trusted store for original, high-quality games for all ages.",
+    "quickLinks": "Quick links",
+    "customerService": "Customer service",
+    "myOrders": "My orders",
+    "wishlist": "Wishlist",
+    "contactUs": "Contact us",
+    "feedback": "Your feedback matters",
+    "faq": "FAQ",
+    "legal": "Legal",
+    "privacyPolicy": "Privacy policy",
+    "termsOfService": "Terms of service",
+    "returnPolicy": "Return policy",
+    "shippingPolicy": "Shipping policy",
+    "callUs": "Call us",
+    "location": "Cairo, Egypt",
+    "fastShipping": "Fast shipping",
+    "fastShippingDesc": "Delivery in 24–48 hours",
+    "securePayment": "Secure payment",
+    "securePaymentDesc": "Trusted payment methods",
+    "buyerProtection": "Buyer protection",
+    "buyerProtectionDesc": "100% satisfaction guarantee",
+    "support247": "24/7 support",
+    "support247Desc": "Team always ready",
+    "copyright": "© {{year}} 3TS - Original Games. All rights reserved.",
+    "developedBy": "Developed by",
+    "paymentMethods": "Payment methods:"
+  },
+  "backToTop": {
+    "label": "Scroll back to top"
+  },
+  "pages": {
+    "home": "Home",
+    "notFound": "Page not found",
+    "notFoundDesc": "Sorry, the page you are looking for does not exist."
+  },
+  "auth": {
+    "login": {
+      "welcomeBack": "Welcome back",
+      "title": "Sign in",
+      "heroDesc": "Sign in to your account to complete orders quickly, track purchases, and enjoy exclusive offers.",
+      "fastShopping": "Fast shopping",
+      "easySecure": "Easy & secure",
+      "techSupport": "Tech support",
+      "formDesc": "Enter your email and password to continue to your account.",
+      "success": "Signed in successfully.",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create account"
+    },
+    "signup": {
+      "joinUs": "Join 3TS",
+      "title": "Create a new account",
+      "heroDesc": "Create your account now to start shopping and get original game deals and exclusive notifications.",
+      "fasterSignup": "Faster signup",
+      "effortless": "Effortless",
+      "accountProtection": "Account protection",
+      "safeFast": "Safe & fast",
+      "formTitle": "Create account",
+      "formDesc": "Enter your details to start shopping on 3TS.",
+      "success": "Account created successfully.",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Enter your full name",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "Create a password",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Re-enter your password",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in"
+    },
+    "errors": {
+      "fillRequired": "Please fill in all required fields",
+      "invalidEmail": "Please enter a valid email address",
+      "passwordMismatch": "Password and confirmation do not match"
+    }
+  },
+  "cart": {
+    "title": "Your cart",
+    "itemCount": "You have {{count}} items in your cart"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "itemCount": "You have {{count}} items in your wishlist"
+  },
+  "dashboard": {
+    "admin": {
+      "title": "Admin panel",
+      "subtitle": "3TS Admin",
+      "dashboard": "Dashboard",
+      "products": "Products",
+      "orders": "Orders",
+      "users": "Users",
+      "vendors": "Vendors",
+      "ads": "Ads",
+      "blogs": "Blog",
+      "feedback": "Feedback"
+    },
+    "vendor": {
+      "title": "Vendor panel",
+      "subtitle": "3TS Vendor",
+      "dashboard": "Dashboard",
+      "products": "My products",
+      "ads": "Ads",
+      "subscription": "Subscription",
+      "productsPayment": "Products payment",
+      "adsPayment": "Ads payment"
+    }
+  }
+}

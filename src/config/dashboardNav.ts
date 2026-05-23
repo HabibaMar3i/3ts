@@ -13,28 +13,28 @@ import {
 import type { LucideIcon } from 'lucide-react'
 
 export interface DashboardNavItem {
-    label: string
+    labelKey: string
     path: string
     icon: LucideIcon
     end?: boolean
 }
 
 export const adminNavItems: DashboardNavItem[] = [
-    { label: 'لوحة التحكم', path: '/admin', icon: LayoutDashboard, end: true },
-    { label: 'المنتجات', path: '/admin/products', icon: Package },
-    { label: 'الطلبات', path: '/admin/orders', icon: ShoppingBag },
-    { label: 'المستخدمون', path: '/admin/users', icon: Users },
-    { label: 'البائعون', path: '/admin/vendors', icon: Store },
-    { label: 'الإعلانات', path: '/admin/ads', icon: Megaphone },
-    { label: 'المدونة', path: '/admin/blogs', icon: FileText },
-    { label: 'التعليقات', path: '/admin/feedback', icon: MessageSquare },
+    { labelKey: 'dashboard.admin.dashboard', path: '/admin', icon: LayoutDashboard, end: true },
+    { labelKey: 'dashboard.admin.products', path: '/admin/products', icon: Package },
+    { labelKey: 'dashboard.admin.orders', path: '/admin/orders', icon: ShoppingBag },
+    { labelKey: 'dashboard.admin.users', path: '/admin/users', icon: Users },
+    { labelKey: 'dashboard.admin.vendors', path: '/admin/vendors', icon: Store },
+    { labelKey: 'dashboard.admin.ads', path: '/admin/ads', icon: Megaphone },
+    { labelKey: 'dashboard.admin.blogs', path: '/admin/blogs', icon: FileText },
+    { labelKey: 'dashboard.admin.feedback', path: '/admin/feedback', icon: MessageSquare },
 ]
 
 export const vendorNavItems: DashboardNavItem[] = [
-    { label: 'لوحة التحكم', path: '/vendor', icon: LayoutDashboard, end: true },
-    { label: 'منتجاتي', path: '/vendor/products', icon: Package },
-    { label: 'الإعلانات', path: '/vendor/ads', icon: Megaphone },
-    { label: 'الاشتراك', path: '/vendor/subscription', icon: CreditCard },
-    { label: 'دفع المنتجات', path: '/vendor/products-payment', icon: Wallet },
-    { label: 'دفع الإعلانات', path: '/vendor/ads-payment', icon: Wallet },
+    { labelKey: 'dashboard.vendor.dashboard', path: '/vendor', icon: LayoutDashboard, end: true },
+    { labelKey: 'dashboard.vendor.products', path: '/vendor/products', icon: Package },
+    { labelKey: 'dashboard.vendor.ads', path: '/vendor/ads', icon: Megaphone },
+    { labelKey: 'dashboard.vendor.subscription', path: '/vendor/subscription', icon: CreditCard },
+    { labelKey: 'dashboard.vendor.productsPayment', path: '/vendor/products-payment', icon: Wallet },
+    { labelKey: 'dashboard.vendor.adsPayment', path: '/vendor/ads-payment', icon: Wallet },
 ]

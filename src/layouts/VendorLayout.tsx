@@ -1,14 +1,17 @@
 import { Outlet } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { DashboardSidebar } from '../components/dashboard/DashboardSidebar'
 import { vendorNavItems } from '../config/dashboardNav'
 
 export default function VendorLayout() {
+    const { t } = useTranslation()
+
     return (
-        <div className="min-h-screen bg-background" dir="rtl">
+        <div className="min-h-screen bg-background">
             <div className="flex min-h-screen flex-col lg:flex-row">
                 <DashboardSidebar
-                    title="لوحة البائع"
-                    subtitle="3TS Vendor"
+                    title={t('dashboard.vendor.title')}
+                    subtitle={t('dashboard.vendor.subtitle')}
                     homePath="/vendor"
                     navItems={vendorNavItems}
                 />

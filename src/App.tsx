@@ -26,6 +26,7 @@ import Wishlist from './pages/Wishlist'
 import Layout from './layouts/Layout'
 import AdminLayout from './layouts/AdminLayout'
 import VendorLayout from './layouts/VendorLayout'
+import LocaleSync from './components/common/LocaleSync'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminAds from './pages/admin/Ads'
@@ -54,6 +55,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <LocaleSync />
       <div className="app-shell">
         <Routes>
           <Route path="/" element={<Layout />}>

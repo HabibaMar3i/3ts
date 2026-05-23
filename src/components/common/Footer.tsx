@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Mail, Phone, MapPin, CreditCard, Truck, Shield, HelpCircle } from 'lucide-react'
 
 export default function Footer() {
+    const { t } = useTranslation()
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-slate-950 text-slate-100" dir="rtl">
+        <footer className="bg-slate-950 text-slate-100">
             {/* Top accent bar matching navbar */}
             <div className="h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"></div>
 
@@ -21,11 +23,11 @@ export default function Footer() {
                             </div>
                             <div className="flex flex-col">
                                 <p className="text-sm font-bold text-white">3TS</p>
-                                <p className="text-xs text-slate-400">ألعاب أصلية</p>
+                                <p className="text-xs text-slate-400">{t('common.brandTagline')}</p>
                             </div>
                         </div>
                         <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                            متجرك الموثوق للألعاب الأصلية والعالية الجودة لجميع الأعمار.
+                            {t('footer.description')}
                         </p>
                         {/* Social Links */}
                         <div className="flex items-center gap-3">
@@ -64,32 +66,32 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
                             <span className="inline-block w-1 h-5 bg-red-600 rounded"></span>
-                            روابط سريعة
+                            {t('footer.quickLinks')}
                         </h3>
                         <ul className="space-y-3">
                             <li>
                                 <Link to="/" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    الرئيسية
+                                    {t('nav.home')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/products" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    المنتجات
+                                    {t('nav.products')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/about" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    عن الشركة
+                                    {t('nav.about')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/services" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    الخدمات
+                                    {t('nav.services')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/contact" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    التواصل
+                                    {t('nav.contact')}
                                 </Link>
                             </li>
                         </ul>
@@ -99,32 +101,32 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
                             <span className="inline-block w-1 h-5 bg-red-600 rounded"></span>
-                            خدمة العملاء
+                            {t('footer.customerService')}
                         </h3>
                         <ul className="space-y-3">
                             <li>
                                 <Link to="/orders" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    طلباتي
+                                    {t('footer.myOrders')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/wishlist" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    قائمة الرغبات
+                                    {t('footer.wishlist')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/contact" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    تواصل معنا
+                                    {t('footer.contactUs')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/feedback" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    تقييمك مهم
+                                    {t('footer.feedback')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/faq" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    الأسئلة الشائعة
+                                    {t('footer.faq')}
                                 </Link>
                             </li>
                         </ul>
@@ -134,27 +136,27 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
                             <span className="inline-block w-1 h-5 bg-red-600 rounded"></span>
-                            القانوني
+                            {t('footer.legal')}
                         </h3>
                         <ul className="space-y-3">
                             <li>
                                 <Link to="/privacy-policy" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    سياسة الخصوصية
+                                    {t('footer.privacyPolicy')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/terms-of-service" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    شروط الخدمة
+                                    {t('footer.termsOfService')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/return-policy" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    سياسة الاسترجاع
+                                    {t('footer.returnPolicy')}
                                 </Link>
                             </li>
                             <li>
                                 <Link to="/shipping-policy" className="text-base text-slate-300 transition-colors hover:text-red-500">
-                                    سياسة الشحن
+                                    {t('footer.shippingPolicy')}
                                 </Link>
                             </li>
                         </ul>
@@ -164,7 +166,7 @@ export default function Footer() {
                     <div>
                         <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
                             <span className="inline-block w-1 h-5 bg-red-600 rounded"></span>
-                            اتصل بنا
+                            {t('footer.callUs')}
                         </h3>
                         <ul className="space-y-4">
                             <li className="flex items-start gap-3">
@@ -182,7 +184,7 @@ export default function Footer() {
                             <li className="flex items-start gap-3">
                                 <MapPin size={18} className="text-red-600 mt-0.5 flex-shrink-0" />
                                 <span className="text-base text-slate-300">
-                                    القاهرة، مصر
+                                    {t('footer.location')}
                                 </span>
                             </li>
                         </ul>
@@ -199,8 +201,8 @@ export default function Footer() {
                                 <Truck size={24} className="text-red-600" />
                             </div>
                             <div className="flex-1">
-                                <p className="text-sm font-bold text-slate-100">شحن سريع</p>
-                                <p className="text-sm text-slate-300">توصيل في 24-48 ساعة</p>
+                                <p className="text-sm font-bold text-slate-100">{t('footer.fastShipping')}</p>
+                                <p className="text-sm text-slate-300">{t('footer.fastShippingDesc')}</p>
                             </div>
                         </div>
 
@@ -209,8 +211,8 @@ export default function Footer() {
                                 <CreditCard size={24} className="text-red-600" />
                             </div>
                             <div className="flex-1">
-                                <p className="text-sm font-bold text-slate-100">دفع آمن</p>
-                                <p className="text-sm text-slate-300">طرق دفع موثوقة</p>
+                                <p className="text-sm font-bold text-slate-100">{t('footer.securePayment')}</p>
+                                <p className="text-sm text-slate-300">{t('footer.securePaymentDesc')}</p>
                             </div>
                         </div>
 
@@ -219,8 +221,8 @@ export default function Footer() {
                                 <Shield size={24} className="text-red-600" />
                             </div>
                             <div className="flex-1">
-                                <p className="text-sm font-bold text-slate-100">حماية المشتري</p>
-                                <p className="text-sm text-slate-300">100% ضمان رضاك</p>
+                                <p className="text-sm font-bold text-slate-100">{t('footer.buyerProtection')}</p>
+                                <p className="text-sm text-slate-300">{t('footer.buyerProtectionDesc')}</p>
                             </div>
                         </div>
 
@@ -229,8 +231,8 @@ export default function Footer() {
                                 <HelpCircle size={24} className="text-red-600" />
                             </div>
                             <div className="flex-1">
-                                <p className="text-sm font-bold text-slate-100">دعم 24/7</p>
-                                <p className="text-sm text-slate-300">فريق جاهز دائماً</p>
+                                <p className="text-sm font-bold text-slate-100">{t('footer.support247')}</p>
+                                <p className="text-sm text-slate-300">{t('footer.support247Desc')}</p>
                             </div>
                         </div>
                 </div>
@@ -240,16 +242,17 @@ export default function Footer() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
                         <div>
                             <p className="text-sm text-slate-300">
-                                © {currentYear} 3TS - ألعاب أصلية. جميع الحقوق محفوظة.
+                                {t('footer.copyright', { year: currentYear })}
                             </p>
                         </div>
                         <div className="flex justify-center">
                             <p className="text-sm text-slate-300">
-                                تم التطوير بواسطة <span className="text-red-600 font-semibold">HabibaDev</span>
+                                {t('footer.developedBy')}{' '}
+                                <span className="text-red-600 font-semibold">HabibaDev</span>
                             </p>
                         </div>
                         <div className="flex justify-end gap-2">
-                            <span className="text-sm text-slate-300">طرق الدفع:</span>
+                            <span className="text-sm text-slate-300">{t('footer.paymentMethods')}</span>
                             <div className="flex gap-2">
                                 <div className="h-5 w-8 rounded border border-slate-700 bg-slate-800 flex items-center justify-center text-[8px] text-slate-300">VISA</div>
                                 <div className="h-5 w-8 rounded border border-slate-700 bg-slate-800 flex items-center justify-center text-[8px] text-slate-300">MC</div>

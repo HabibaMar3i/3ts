@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Menu, Store } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Separator } from '../ui/separator'
@@ -27,6 +28,8 @@ function SidebarNav({
     subtitle,
     onNavigate,
 }: DashboardSidebarProps & { onNavigate?: () => void }) {
+    const { t } = useTranslation()
+
     return (
         <>
             <div className="p-4">
@@ -60,7 +63,7 @@ function SidebarNav({
                         }
                     >
                         <item.icon size={18} />
-                        {item.label}
+                        {t(item.labelKey)}
                     </NavLink>
                 ))}
             </nav>
@@ -69,7 +72,7 @@ function SidebarNav({
 
             <div className="p-4">
                 <Button variant="outline" className="w-full" asChild onClick={onNavigate}>
-                    <Link to="/">العودة للمتجر</Link>
+                    <Link to="/">{t('common.backToStore')}</Link>
                 </Button>
             </div>
         </>
@@ -77,6 +80,7 @@ function SidebarNav({
 }
 
 export function DashboardSidebar(props: DashboardSidebarProps) {
+    const { t } = useTranslation()
     const [mobileOpen, setMobileOpen] = useState(false)
 
     return (
@@ -88,7 +92,7 @@ export function DashboardSidebar(props: DashboardSidebarProps) {
                 </div>
                 <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
                     <SheetTrigger asChild>
-                        <Button variant="outline" size="icon" aria-label="فتح القائمة">
+                        <Button variant="outline" size="icon" aria-label={t('common.openMenu')}>
                             <Menu size={18} />
                         </Button>
                     </SheetTrigger>

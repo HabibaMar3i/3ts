@@ -1,0 +1,144 @@
+{
+  "common": {
+    "brandTagline": "ألعاب أصلية",
+    "backToStore": "العودة للمتجر",
+    "openMenu": "فتح القائمة",
+    "language": "اللغة",
+    "arabic": "العربية",
+    "english": "English"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "about": "عن الشركة",
+    "services": "الخدمات",
+    "contact": "التواصل",
+    "newBadge": "جديد",
+    "searchPlaceholder": "ابحث عن لعبة ...",
+    "searchPlaceholderShort": "ابحث...",
+    "search": "ابحث",
+    "notifications": "الإشعارات",
+    "wishlist": "المفضلة",
+    "cart": "السلة",
+    "login": "دخول",
+    "signup": "إنشاء حساب",
+    "menu": "القائمة"
+  },
+  "footer": {
+    "description": "متجرك الموثوق للألعاب الأصلية والعالية الجودة لجميع الأعمار.",
+    "quickLinks": "روابط سريعة",
+    "customerService": "خدمة العملاء",
+    "myOrders": "طلباتي",
+    "wishlist": "قائمة الرغبات",
+    "contactUs": "تواصل معنا",
+    "feedback": "تقييمك مهم",
+    "faq": "الأسئلة الشائعة",
+    "legal": "القانوني",
+    "privacyPolicy": "سياسة الخصوصية",
+    "termsOfService": "شروط الخدمة",
+    "returnPolicy": "سياسة الاسترجاع",
+    "shippingPolicy": "سياسة الشحن",
+    "callUs": "اتصل بنا",
+    "location": "القاهرة، مصر",
+    "fastShipping": "شحن سريع",
+    "fastShippingDesc": "توصيل في 24-48 ساعة",
+    "securePayment": "دفع آمن",
+    "securePaymentDesc": "طرق دفع موثوقة",
+    "buyerProtection": "حماية المشتري",
+    "buyerProtectionDesc": "100% ضمان رضاك",
+    "support247": "دعم 24/7",
+    "support247Desc": "فريق جاهز دائماً",
+    "copyright": "© {{year}} 3TS - ألعاب أصلية. جميع الحقوق محفوظة.",
+    "developedBy": "تم التطوير بواسطة",
+    "paymentMethods": "طرق الدفع:"
+  },
+  "backToTop": {
+    "label": "العودة إلى الأعلى"
+  },
+  "pages": {
+    "home": "الرئيسية",
+    "notFound": "الصفحة غير موجودة",
+    "notFoundDesc": "عذراً، الصفحة التي تبحث عنها غير موجودة."
+  },
+  "auth": {
+    "login": {
+      "welcomeBack": "مرحباً بعودتك",
+      "title": "تسجيل الدخول",
+      "heroDesc": "سجّل الدخول إلى حسابك لتكمل طلباتك بسرعة، تتابع مشترياتك، وتستفيد من عروضنا المميزة.",
+      "fastShopping": "تسوق سريع",
+      "easySecure": "سهل وآمن",
+      "techSupport": "دعم فني",
+      "formDesc": "أدخل بريدك وكلمة المرور للمتابعة إلى حسابك.",
+      "success": "تم تسجيل الدخول بنجاح.",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "rememberMe": "تذكرني",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "submit": "دخول",
+      "noAccount": "ليس لديك حساب؟",
+      "createAccount": "إنشاء حساب"
+    },
+    "signup": {
+      "joinUs": "انضم إلى 3TS",
+      "title": "إنشاء حساب جديد",
+      "heroDesc": "أنشئ حسابك الآن لتبدأ التسوق واستفيد من عروض الألعاب الأصلية والإشعارات الخاصة.",
+      "fasterSignup": "تسجيل أسرع",
+      "effortless": "بدون مجهود",
+      "accountProtection": "حماية الحساب",
+      "safeFast": "آمنة وسريعة",
+      "formTitle": "إنشاء حساب",
+      "formDesc": "سجل بياناتك لبدء التسوق على 3TS.",
+      "success": "تم إنشاء الحساب بنجاح.",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "أدخل اسمك الكامل",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "أنشئ كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "confirmPasswordPlaceholder": "أعد كتابة كلمة المرور",
+      "submit": "إنشاء حساب",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "login": "تسجيل الدخول"
+    },
+    "errors": {
+      "fillRequired": "الرجاء ملء جميع الحقول المطلوبة",
+      "invalidEmail": "الرجاء إدخال بريد إلكتروني صالح",
+      "passwordMismatch": "كلمة المرور وتأكيدها غير متطابقين"
+    }
+  },
+  "cart": {
+    "title": "سلتك",
+    "itemCount_one": "لديك {{count}} منتج في السلة",
+    "itemCount_other": "لديك {{count}} منتجات في السلة"
+  },
+  "wishlist": {
+    "title": "قائمة المفضلة",
+    "itemCount_one": "لديك {{count}} منتج في المفضلة",
+    "itemCount_other": "لديك {{count}} منتجات في المفضلة"
+  },
+  "dashboard": {
+    "admin": {
+      "title": "لوحة الإدارة",
+      "subtitle": "3TS Admin",
+      "dashboard": "لوحة التحكم",
+      "products": "المنتجات",
+      "orders": "الطلبات",
+      "users": "المستخدمون",
+      "vendors": "البائعون",
+      "ads": "الإعلانات",
+      "blogs": "المدونة",
+      "feedback": "التعليقات"
+    },
+    "vendor": {
+      "title": "لوحة البائع",
+      "subtitle": "3TS Vendor",
+      "dashboard": "لوحة التحكم",
+      "products": "منتجاتي",
+      "ads": "الإعلانات",
+      "subscription": "الاشتراك",
+      "productsPayment": "دفع المنتجات",
+      "adsPayment": "دفع الإعلانات"
+    }
+  }
+}
