@@ -17,7 +17,7 @@ export default function Navbar() {
     const [searchMobile, setSearchMobile] = useState(false)
 
     return (
-        <nav className="sticky top-0 z-50 bg-white" dir="rtl">
+        <nav className="sticky top-0 z-50 bg-white">
             {/* Top Bar - Red accent strip */}
             <div className="h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"></div>
 
@@ -30,9 +30,7 @@ export default function Navbar() {
                         <Link to="/" className="flex-shrink-0">
                             <div className="flex items-center gap-3">
                                 <div className="relative">
-                                    <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-red-600 to-red-700 text-white shadow-lg shadow-red-600/30 transition-transform duration-300 hover:scale-105 hover:-translate-y-1">
-                                        <span className="text-lg font-bold tracking-tight">3TS</span>
-                                    </div>
+                                    <img src="/logo1.png" alt="3TS Logo" className="h-12 w-12 object-contain transition-transform duration-300 hover:scale-105 hover:-translate-y-1" />
                                 </div>
                                 <div className="hidden sm:flex flex-col">
                                     <p className="text-sm font-bold text-slate-950">3TS</p>
