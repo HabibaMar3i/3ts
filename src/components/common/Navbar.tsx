@@ -126,7 +126,7 @@ export default function Navbar() {
                             </Link>
 
                             {/* Auth Buttons - Desktop */}
-                            <div className="hidden md:flex items-center gap-2 border-r-2 border-slate-200 pr-4">
+                            <div className="hidden md:flex items-center gap-2 pr-4">
                                 <Button
                                     variant="outline"
                                     size="sm"
