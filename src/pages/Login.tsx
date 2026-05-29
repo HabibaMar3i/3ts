@@ -117,7 +117,7 @@ export default function Login() {
                     />
                     {t('auth.login.rememberMe')}
                   </label>
-                  <Link to="/" className="text-sm font-semibold text-red-600 hover:text-red-700">
+                  <Link to="/forget-password" className="text-sm font-semibold text-red-600 hover:text-red-700">
                     {t('auth.login.forgotPassword')}
                   </Link>
                 </div>
