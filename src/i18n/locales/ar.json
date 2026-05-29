@@ -133,7 +133,20 @@
       "title": "العنوان",
       "edit": "تعديل العنوان",
       "label": "موقع الاستلام",
-      "placeholder": "تحديد موقع الاستلام"
+      "placeholder": "تحديد موقع الاستلام",
+      "mapTitle": "اختر موقع الاستلام",
+      "mapDescription": "انقر على الخريطة أو اسحب الدبوس لتحديد موقع التوصيل",
+      "mapHint": "انقر على الخريطة أو اسحب الدبوس الأحمر لتحديد الموقع بدقة",
+      "confirmLocation": "تأكيد الموقع",
+      "cancel": "إلغاء",
+      "useMyLocation": "استخدام موقعي الحالي",
+      "geolocationUnsupported": "المتصفح لا يدعم تحديد الموقع",
+      "geolocationDenied": "تم رفض إذن الموقع. فعّله من إعدادات المتصفح",
+      "geocoderLoading": "جاري تحميل الخريطة، حاول مرة أخرى",
+      "geocodeFailed": "تعذر تحويل الموقع إلى عنوان. حاول مرة أخرى",
+      "missingApiKeyTitle": "مفتاح Google Maps غير مُعرّف",
+      "missingApiKeyDesc": "أضف المفتاح في ملف .env في جذر المشروع:",
+      "missingApiKeyHelp": "راجع ملف docs/GOOGLE_MAPS_SETUP.md للخطوات التفصيلية"
     },
     "payment": {
       "title": "وسيلة الدفع",

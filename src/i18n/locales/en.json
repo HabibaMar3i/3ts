@@ -132,7 +132,20 @@
       "title": "Address",
       "edit": "Edit address",
       "label": "Delivery location",
-      "placeholder": "Select delivery location"
+      "placeholder": "Select delivery location",
+      "mapTitle": "Choose delivery location",
+      "mapDescription": "Click the map or drag the pin to set your delivery point",
+      "mapHint": "Click the map or drag the pin to fine-tune the location",
+      "confirmLocation": "Confirm location",
+      "cancel": "Cancel",
+      "useMyLocation": "Use my current location",
+      "geolocationUnsupported": "Geolocation is not supported in this browser",
+      "geolocationDenied": "Location permission denied. Enable it in browser settings",
+      "geocoderLoading": "Map is still loading, please try again",
+      "geocodeFailed": "Could not resolve address for this pin. Try again",
+      "missingApiKeyTitle": "Google Maps API key is missing",
+      "missingApiKeyDesc": "Add your key to a .env file in the project root:",
+      "missingApiKeyHelp": "See docs/GOOGLE_MAPS_SETUP.md for step-by-step setup"
     },
     "payment": {
       "title": "Payment method",
