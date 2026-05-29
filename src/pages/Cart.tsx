@@ -1,62 +1,27 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { CartHeader } from '../components/cart/CartHeader'
 import { CartItemCard } from '../components/cart/CartItemCard'
 import { CartSummary } from '../components/cart/CartSummary'
-import { PromoCodeSection } from '../components/cart/PromoCodeSection'
-import type { CartItem } from '../components/cart/types'
+import { cartItems, getCartItemCount, getCartSubtotal } from '../data/cart'
+import { useCheckoutSummary } from '../hooks/useCheckoutSummary'
 
 export default function Cart() {
-    // Sample cart items
-    const cartItems: CartItem[] = [
-        {
-            id: 1,
-            name: 'سيارة ديناصور ذكية',
-            price: 299.99,
-            quantity: 2,
-            image: 'https://hedeya.com/cdn/shop/files/51ipoogjgpl-photoroom_1.jpg?v=1764661945&width=360?w=400&h=400&fit=crop',
-            category: 'سيارات',
-        },
-        {
-            id: 2,
-            name: 'مجموعة مكعبات بناء 500 قطعة',
-            price: 149.99,
-            quantity: 1,
-            image: 'https://hedeya.com/cdn/shop/files/61cueyvkz0l._ac_sl1500.jpg?v=1764652370&width=360?w=400&h=400&fit=crop',
-            category: 'بناء',
-        },
-        {
-            id: 3,
-            name: 'دراجة هوائية للأطفال',
-            price: 499.99,
-            quantity: 1,
-            image: 'https://hedeya.com/cdn/shop/files/588da_multi_blocks_92_parca.jpg?v=1764651688&width=360?w=400&h=400&fit=crop',
-            category: 'رياضة',
-        },
-        {
-            id: 4,
-            name: 'لعبة روبوت تفاعلي',
-            price: 399.99,
-            quantity: 1,
-            image: 'https://hedeya.com/cdn/shop/files/7233886dfcaf6e8485cd0dc5320eb8f2dc32a6f7.jpg?v=1764570447&width=360?w=400&h=400&fit=crop',
-            category: 'إلكترونيات',
-        },
-    ]
+    const { t, i18n } = useTranslation()
+    const { summary, isPending } = useCheckoutSummary()
 
-    const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-    const shipping = 50
-    const tax = subtotal * 0.14 // 14% tax
-    const total = subtotal + shipping + tax
+    const subtotal = summary?.subtotal ?? getCartSubtotal(cartItems)
+    const vatRate = summary?.vatRate ?? 0.14
+    const vatAmount = summary?.vatAmount ?? subtotal * vatRate
+    const total = summary?.total ?? subtotal + vatAmount
 
     return (
         <div className="min-h-screen bg-white">
-            {/* Header */}
-            <CartHeader itemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)} />
+            <CartHeader itemCount={getCartItemCount(cartItems)} />
 
-            {/* Main Content */}
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Cart Items - Left Side */}
+            <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                     <div className="lg:col-span-2">
                         <div className="space-y-4">
                             {cartItems.map((item, index) => (
@@ -64,22 +29,25 @@ export default function Cart() {
                             ))}
                         </div>
 
-                        {/* Continue Shopping */}
                         <Link
                             to="/products"
-                            className="mt-8 inline-flex items-center gap-2 text-red-600 font-semibold hover:gap-3 transition-all"
+                            className="mt-8 inline-flex items-center gap-2 font-semibold text-red-600 transition-all hover:gap-3"
                         >
                             <ArrowRight size={18} className="rtl:rotate-180" />
-                            تابع التسوق
+                            {t('orders.continueShopping')}
                         </Link>
                     </div>
 
-                    {/* Order Summary - Right Side */}
-                    <CartSummary subtotal={subtotal} shipping={shipping} tax={tax} total={total} />
+                    <CartSummary
+                        subtotal={subtotal}
+                        vatRate={vatRate}
+                        vatAmount={vatAmount}
+                        total={total}
+                        locale={i18n.language}
+                        isLoading={isPending}
+                    />
                 </div>
             </div>
-
-            <PromoCodeSection />
         </div>
     )
 }

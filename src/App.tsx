@@ -8,6 +8,7 @@ import 'aos/dist/aos.css'
 
 import About from './pages/About'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
 import Contact from './pages/Contact'
 import Feedback from './pages/Feedback'
 import Home from './pages/Home'
@@ -72,6 +73,7 @@ function App() {
               <Route path="products" element={<Products />} />
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="cart" element={<Cart />} />
+              <Route path="checkout" element={<Checkout />} />
               <Route path="wishlist" element={<Wishlist />} />
               <Route path="orders" element={<Orders />} />
               <Route path="orders/made-and-done" element={<OrdersMadeAndDone />} />

@@ -115,6 +115,51 @@
     "title": "Your cart",
     "itemCount": "You have {{count}} items in your cart"
   },
+  "checkout": {
+    "title": "Checkout",
+    "subtitle": "Complete your delivery address and payment method to confirm your order",
+    "success": "Your order was confirmed successfully.",
+    "backToCart": "Back to cart",
+    "products": "Products ({{count}})",
+    "storeName": "3TS Store",
+    "breadcrumb": {
+      "home": "Home",
+      "products": "Products",
+      "cart": "Cart",
+      "checkout": "Checkout"
+    },
+    "address": {
+      "title": "Address",
+      "edit": "Edit address",
+      "label": "Delivery location",
+      "placeholder": "Select delivery location"
+    },
+    "payment": {
+      "title": "Payment method",
+      "electronic": "Card payment",
+      "wallet": "Wallet payment"
+    },
+    "notes": {
+      "title": "Your notes (optional)",
+      "placeholder": "Enter your note here"
+    },
+    "summary": {
+      "title": "Order summary",
+      "subtotal": "Products total",
+      "vat": "VAT ({{rate}}%)",
+      "total": "Total",
+      "taxNote": "Prices include tax *",
+      "confirm": "Confirm",
+      "proceed": "Proceed to checkout",
+      "submitting": "Confirming…",
+      "loading": "Loading summary…",
+      "error": "Could not load order summary"
+    },
+    "trust": {
+      "secure": "100% secure payment",
+      "returns": "Easy returns within 30 days"
+    }
+  },
   "orders": {
     "loading": "Loading orders...",
     "empty": "No orders in this section",
