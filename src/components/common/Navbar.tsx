@@ -1,9 +1,15 @@
 ﻿import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Menu, X, Search, ShoppingCart, Bell, ChevronDown, ChevronRight } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '../ui/dropdown-menu'
 import LanguageSwitcher from './LanguageSwitcher'
 
 // ─── Mock auth state (swap with real store later) ─────────────────────────────
@@ -17,14 +23,21 @@ const MOCK_USER = {
 
 export default function Navbar() {
     const { t } = useTranslation()
+    const location = useLocation()
     const [isOpen, setIsOpen] = useState(false)
     const [searchMobile] = useState(false)
 
     const navLinks = [
         { name: t('nav.home', 'الرئيسية'), path: '/' },
         { name: t('nav.categories', 'الأقسام'), path: '/categories', hasDropdown: true },
-        { name: t('nav.orders', 'الطلبات'), path: '/orders' },
     ]
+
+    const orderLinks = [
+        { name: t('nav.ordersMadeAndDone', 'المنجزة'), path: '/orders/made-and-done' },
+        { name: t('nav.ordersRefund', 'الاسترجاع'), path: '/orders/refund' },
+    ]
+
+    const isOrdersActive = orderLinks.some((link) => location.pathname.startsWith(link.path))
 
     return (
         <nav className="sticky top-0 z-50 bg-white shadow-sm">
@@ -33,7 +46,7 @@ export default function Navbar() {
       ══════════════════════════════════════════════ */}
             <div className="border-b border-slate-100">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between gap-4 py-3" dir="rtl">
+                    <div className="flex items-center justify-between gap-4 py-3">
 
                         {/* Right: Logo */}
                         <Link to="/" className="flex-shrink-0 hidden sm:block">
@@ -58,12 +71,12 @@ export default function Navbar() {
                             <div className="relative w-full group">
                                 <Search
                                     size={18}
-                                    className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-600 transition-colors"
+                                    className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-600 transition-colors"
                                 />
                                 <Input
                                     type="text"
                                     placeholder={t('nav.searchPlaceholder', 'ابحث عن المنتجات...')}
-                                    className="w-full rounded-full border border-slate-200 bg-slate-50 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all focus:border-red-400 focus:bg-white focus:ring-2 focus:ring-red-100"
+                                    className="w-full rounded-full border border-slate-200 bg-slate-50 ps-10 pe-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 transition-all focus:border-red-400 focus:bg-white focus:ring-2 focus:ring-red-100"
                                 />
                             </div>
                         </div>
@@ -127,7 +140,7 @@ export default function Navbar() {
       ══════════════════════════════════════════════ */}
             <div className="border-b border-slate-100 bg-white">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between py-2" dir="rtl">
+                    <div className="flex items-center justify-between py-2">
 
                         {/* Right: Nav Links */}
                         <div className="hidden lg:flex items-center gap-1">
@@ -141,9 +154,33 @@ export default function Navbar() {
                                     {link.hasDropdown && (
                                         <ChevronDown size={14} className="text-slate-400 group-hover:text-red-600 transition-colors" />
                                     )}
-                                    <span className="absolute bottom-0 right-0 h-0.5 w-0 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full" />
+                                    <span className="absolute bottom-0 end-0 h-0.5 w-0 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full" />
                                 </Link>
                             ))}
+
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <button
+                                        type="button"
+                                        className={`relative group flex items-center gap-1 px-4 py-2 text-sm font-semibold rounded-lg transition-all hover:text-red-700 hover:bg-red-50 ${
+                                            isOrdersActive ? 'text-red-700 bg-red-50' : 'text-slate-700'
+                                        }`}
+                                    >
+                                        {t('nav.orders', 'الطلبات')}
+                                        <ChevronDown size={14} className="text-slate-400 group-hover:text-red-600 transition-colors" />
+                                        <span className="absolute bottom-0 end-0 h-0.5 w-0 bg-red-600 transition-all duration-300 group-hover:w-full rounded-full" />
+                                    </button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end" className="min-w-44">
+                                    {orderLinks.map((link) => (
+                                        <DropdownMenuItem key={link.path} asChild>
+                                            <Link to={link.path} className="cursor-pointer font-semibold">
+                                                {link.name}
+                                            </Link>
+                                        </DropdownMenuItem>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
 
                         {/* Left: Cart + Notifications */}
@@ -156,7 +193,7 @@ export default function Navbar() {
                             >
                                 <Bell size={19} />
                                 {MOCK_USER.notifCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow shadow-red-400/50">
+                                    <span className="absolute -top-1 -end-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow shadow-red-400/50">
                                         {MOCK_USER.notifCount}
                                     </span>
                                 )}
@@ -170,7 +207,7 @@ export default function Navbar() {
                             >
                                 <ShoppingCart size={19} />
                                 {MOCK_USER.cartCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow shadow-red-400/50">
+                                    <span className="absolute -top-1 -end-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow shadow-red-400/50">
                                         {MOCK_USER.cartCount}
                                     </span>
                                 )}
@@ -197,11 +234,11 @@ export default function Navbar() {
             {searchMobile && (
                 <div className="border-b border-slate-100 bg-white px-4 py-3 lg:hidden">
                     <div className="relative">
-                        <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <Search size={18} className="absolute start-3 top-1/2 -translate-y-1/2 text-slate-400" />
                         <Input
                             type="text"
                             placeholder={t('nav.searchPlaceholder', 'ابحث عن المنتجات...')}
-                            className="w-full rounded-full border border-slate-200 bg-slate-50 pl-10 pr-4 py-2.5 text-sm"
+                            className="w-full rounded-full border border-slate-200 bg-slate-50 ps-10 pe-4 py-2.5 text-sm"
                             autoFocus
                         />
                     </div>
@@ -212,7 +249,7 @@ export default function Navbar() {
           Mobile Menu
       ══════════════════════════════════════════════ */}
             {isOpen && (
-                <div className="border-b border-slate-100 bg-white lg:hidden" dir="rtl">
+                <div className="border-b border-slate-100 bg-white lg:hidden">
 
                     {/* Nav Links */}
                     <div className="flex flex-col px-2 py-2">
@@ -224,7 +261,21 @@ export default function Navbar() {
                                 className="flex items-center justify-between rounded-lg px-4 py-3 text-sm font-semibold text-slate-700 transition-all hover:bg-red-50 hover:text-red-700"
                             >
                                 <span className="flex items-center gap-2">{link.name}</span>
-                                <ChevronRight size={15} className="text-slate-400" />
+                                <ChevronRight size={15} className="text-slate-400 rtl:rotate-180" />
+                            </Link>
+                        ))}
+                        <p className="px-4 pt-3 pb-1 text-xs font-bold text-slate-400">
+                            {t('nav.orders', 'الطلبات')}
+                        </p>
+                        {orderLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                onClick={() => setIsOpen(false)}
+                                className="flex items-center justify-between rounded-lg px-4 py-3 text-sm font-semibold text-slate-700 transition-all hover:bg-red-50 hover:text-red-700"
+                            >
+                                <span>{link.name}</span>
+                                <ChevronRight size={15} className="text-slate-400 rtl:rotate-180" />
                             </Link>
                         ))}
                     </div>

@@ -15,7 +15,7 @@ export function ProductDetailHeader({ product }: ProductDetailHeaderProps) {
                     to="/products"
                     className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-red-600 transition-all hover:gap-3"
                 >
-                    <ArrowRight size={16} />
+                    <ArrowRight size={16} className="rtl:rotate-180" />
                     العودة للمنتجات
                 </Link>
 

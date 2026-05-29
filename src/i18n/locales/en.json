@@ -9,6 +9,10 @@
   },
   "nav": {
     "home": "Home",
+    "orders": "Orders",
+    "ordersMadeAndDone": "Made & done",
+    "ordersRefund": "Refund",
+    "categories": "Categories",
     "products": "Products",
     "about": "About",
     "services": "Services",
@@ -110,6 +114,55 @@
   "cart": {
     "title": "Your cart",
     "itemCount": "You have {{count}} items in your cart"
+  },
+  "orders": {
+    "loading": "Loading orders...",
+    "empty": "No orders in this section",
+    "emptyTitle": "No orders",
+    "browseProducts": "Browse products",
+    "continueShopping": "Continue shopping",
+    "emptyTitle": "No orders",
+    "browseProducts": "Browse products",
+    "continueShopping": "Continue shopping",
+    "card": {
+      "summary": "Order summary",
+      "orderNumber": "Order number",
+      "orderDate": "Order date"
+    },
+    "madeAndDone": {
+      "title": "Made & done orders",
+      "desc": "Track your new, current, completed, and cancelled orders"
+    },
+    "refund": {
+      "title": "Refund orders",
+      "desc": "Track refund requests from review through acceptance or rejection",
+      "tabs": {
+        "review": "Review",
+        "acceptance": "Acceptance",
+        "received": "Received",
+        "rejection": "Rejection"
+      },
+      "status": {
+        "review": "Under review",
+        "acceptance": "Pending acceptance",
+        "received": "Received",
+        "rejection": "Rejected"
+      }
+    },
+    "normal": {
+      "tabs": {
+        "new": "New",
+        "current": "Current",
+        "finished": "Finished",
+        "cancelled": "Cancelled"
+      },
+      "status": {
+        "new": "New",
+        "current": "Current",
+        "finished": "Finished",
+        "cancelled": "Cancelled"
+      }
+    }
   },
   "wishlist": {
     "title": "Wishlist",

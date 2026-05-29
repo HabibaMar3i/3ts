@@ -9,6 +9,10 @@
   },
   "nav": {
     "home": "الرئيسية",
+    "orders": "الطلبات",
+    "ordersMadeAndDone": "المنجزة",
+    "ordersRefund": "الاسترجاع",
+    "categories": "الأقسام",
     "products": "المنتجات",
     "about": "عن الشركة",
     "services": "الخدمات",
@@ -111,6 +115,52 @@
     "title": "سلتك",
     "itemCount_one": "لديك {{count}} منتج في السلة",
     "itemCount_other": "لديك {{count}} منتجات في السلة"
+  },
+  "orders": {
+    "loading": "جاري تحميل الطلبات...",
+    "empty": "لا توجد طلبات في هذا القسم",
+    "emptyTitle": "لا توجد طلبات",
+    "browseProducts": "اكتشف المنتجات",
+    "continueShopping": "تابع التسوق",
+    "card": {
+      "summary": "ملخص الطلب",
+      "orderNumber": "رقم الطلب",
+      "orderDate": "تاريخ الطلب"
+    },
+    "madeAndDone": {
+      "title": "الطلبات المنجزة",
+      "desc": "تابع طلباتك الجديدة والحالية والمنتهية والملغية"
+    },
+    "refund": {
+      "title": "طلبات الاسترجاع",
+      "desc": "تابع حالة طلبات الاسترجاع من المراجعة حتى القبول أو الرفض",
+      "tabs": {
+        "review": "المراجعة",
+        "acceptance": "القبول",
+        "received": "المستلمة",
+        "rejection": "الرفض"
+      },
+      "status": {
+        "review": "قيد المراجعة",
+        "acceptance": "قيد القبول",
+        "received": "مستلمة",
+        "rejection": "مرفوضة"
+      }
+    },
+    "normal": {
+      "tabs": {
+        "new": "جديدة",
+        "current": "حالية",
+        "finished": "منتهية",
+        "cancelled": "ملغية"
+      },
+      "status": {
+        "new": "جديد",
+        "current": "حالية",
+        "finished": "منتهية",
+        "cancelled": "ملغية"
+      }
+    }
   },
   "wishlist": {
     "title": "قائمة المفضلة",

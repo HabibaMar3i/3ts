@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Globe } from 'lucide-react'
-import { supportedLocales, type SupportedLocale } from '../../i18n'
+import { resolveLocale, type SupportedLocale } from '../../i18n'
 import { cn } from '#lib/utils'
 
 interface LanguageSwitcherProps {
@@ -15,9 +15,7 @@ const localeLabels: Record<SupportedLocale, string> = {
 export default function LanguageSwitcher({ className }: LanguageSwitcherProps) {
     const { i18n, t } = useTranslation()
 
-    const currentLocale = (supportedLocales.includes(i18n.language as SupportedLocale)
-        ? i18n.language
-        : 'ar') as SupportedLocale
+    const currentLocale = resolveLocale(i18n.language)
 
     const toggleLocale = () => {
         const nextLocale = currentLocale === 'ar' ? 'en' : 'ar'

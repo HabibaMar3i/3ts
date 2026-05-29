@@ -29,7 +29,7 @@ export default function Products() {
     )
 
     return (
-        <div className="min-h-screen bg-white" dir="rtl">
+        <div className="min-h-screen bg-white">
             <ProductsHeader itemCount={filteredProducts.length} />
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 space-y-8">

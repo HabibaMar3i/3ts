@@ -1,7 +1,5 @@
+import { Navigate } from 'react-router-dom'
+
 export default function Orders() {
-    return (
-        <div>
-            <h1>Orders</h1>
-        </div>
-    )
+    return <Navigate to="/orders/made-and-done" replace />
 }

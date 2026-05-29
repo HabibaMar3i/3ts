@@ -4,7 +4,7 @@ import { Card } from '../components/ui/card'
 
 export default function About() {
     return (
-        <div className="min-h-screen bg-white" dir="rtl">
+        <div className="min-h-screen bg-white">
             {/* Hero Section with Red Gradient */}
             <section className="relative overflow-hidden bg-white py-20">
                 {/* Decorative red gradient background */}

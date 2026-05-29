@@ -11,7 +11,7 @@ export default function Wishlist() {
     const isEmpty = wishlistItems.length === 0
 
     return (
-        <div className="min-h-screen bg-white" dir="rtl">
+        <div className="min-h-screen bg-white">
             <WishlistHeader itemCount={wishlistItems.length} />
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -30,7 +30,7 @@ export default function Wishlist() {
                                 to="/products"
                                 className="mt-8 inline-flex items-center gap-2 font-semibold text-red-600 transition-all hover:gap-3"
                             >
-                                <ArrowRight size={18} />
+                                <ArrowRight size={18} className="rtl:rotate-180" />
                                 تابع التسوق
                             </Link>
                         </div>

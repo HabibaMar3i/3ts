@@ -14,7 +14,7 @@ export default function ProductDetail() {
 
     if (!product) {
         return (
-            <div className="min-h-screen bg-white" dir="rtl">
+            <div className="min-h-screen bg-white">
                 <div className="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 py-24 text-center">
                     <h1 className="text-2xl font-bold text-slate-950">المنتج غير موجود</h1>
                     <p className="mt-2 text-slate-600">تأكد من الرابط أو عد إلى قائمة المنتجات.</p>
@@ -29,7 +29,7 @@ export default function ProductDetail() {
     const relatedProducts = getRelatedProducts(product)
 
     return (
-        <div className="min-h-screen bg-white" dir="rtl">
+        <div className="min-h-screen bg-white">
             <ProductDetailHeader product={product} />
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">

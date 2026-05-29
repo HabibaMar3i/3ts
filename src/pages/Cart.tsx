@@ -49,7 +49,7 @@ export default function Cart() {
     const total = subtotal + shipping + tax
 
     return (
-        <div className="min-h-screen bg-white" dir="rtl">
+        <div className="min-h-screen bg-white">
             {/* Header */}
             <CartHeader itemCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)} />
 
@@ -69,7 +69,7 @@ export default function Cart() {
                             to="/products"
                             className="mt-8 inline-flex items-center gap-2 text-red-600 font-semibold hover:gap-3 transition-all"
                         >
-                            <ArrowRight size={18} />
+                            <ArrowRight size={18} className="rtl:rotate-180" />
                             تابع التسوق
                         </Link>
                     </div>

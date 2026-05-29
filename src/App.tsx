@@ -14,6 +14,8 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Orders from './pages/Orders'
+import OrdersMadeAndDone from './pages/OrdersMadeAndDone'
+import OrdersRefund from './pages/OrdersRefund'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import ProductDetail from './pages/ProductDetail'
 import Products from './pages/Products'
@@ -72,6 +74,8 @@ function App() {
               <Route path="cart" element={<Cart />} />
               <Route path="wishlist" element={<Wishlist />} />
               <Route path="orders" element={<Orders />} />
+              <Route path="orders/made-and-done" element={<OrdersMadeAndDone />} />
+              <Route path="orders/refund" element={<OrdersRefund />} />
               <Route path="profile" element={<Profile />} />
               <Route path="contact" element={<Contact />} />
               <Route path="feedback" element={<Feedback />} />
