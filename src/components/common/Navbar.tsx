@@ -1,7 +1,7 @@
 ﻿import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Menu, X, Search, ShoppingCart, Bell, ChevronDown, MapPin, ChevronRight } from 'lucide-react'
+import { Menu, X, Search, ShoppingCart, Bell, ChevronDown, ChevronRight } from 'lucide-react'
 import { Button } from '../../components/ui/button'
 import { Input } from '../../components/ui/input'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -18,7 +18,7 @@ const MOCK_USER = {
 export default function Navbar() {
     const { t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
-    const [searchMobile, setSearchMobile] = useState(false)
+    const [searchMobile] = useState(false)
 
     const navLinks = [
         { name: t('nav.home', 'الرئيسية'), path: '/' },
