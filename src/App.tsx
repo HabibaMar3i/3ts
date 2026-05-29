@@ -43,6 +43,9 @@ import VendorAdsPayment from './pages/vendor/AdsPayment'
 import VendorProducts from './pages/vendor/Products'
 import VendorProductsPayment from './pages/vendor/ProductsPayment'
 import VendorSubscription from './pages/vendor/Subscription'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 function App() {
   useEffect(() => {
@@ -54,53 +57,58 @@ function App() {
   }, [])
 
   return (
-    <BrowserRouter>
-      <LocaleSync />
-      <div className="app-shell">
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="services" element={<Services />} />
-            <Route path="products" element={<Products />} />
-            <Route path="product/:id" element={<ProductDetail />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="wishlist" element={<Wishlist />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="feedback" element={<Feedback />} />
-            <Route path="privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="terms-of-service" element={<TermsOfService />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<SignUp />} />
-          </Route>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <LocaleSync />
+        <div className="app-shell">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="about" element={<About />} />
+              <Route path="services" element={<Services />} />
+              <Route path="products" element={<Products />} />
+              <Route path="product/:id" element={<ProductDetail />} />
+              <Route path="cart" element={<Cart />} />
+              <Route path="wishlist" element={<Wishlist />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="feedback" element={<Feedback />} />
+              <Route path="privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="terms-of-service" element={<TermsOfService />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<SignUp />} />
+            </Route>
 
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="ads" element={<AdminAds />} />
-            <Route path="blogs" element={<AdminBlogs />} />
-            <Route path="feedback" element={<AdminFeedback />} />
-            <Route path="orders" element={<AdminOrders />} />
-            <Route path="products" element={<AdminProducts />} />
-            <Route path="users" element={<AdminUsers />} />
-            <Route path="vendors" element={<AdminVendors />} />
-          </Route>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="ads" element={<AdminAds />} />
+              <Route path="blogs" element={<AdminBlogs />} />
+              <Route path="feedback" element={<AdminFeedback />} />
+              <Route path="orders" element={<AdminOrders />} />
+              <Route path="products" element={<AdminProducts />} />
+              <Route path="users" element={<AdminUsers />} />
+              <Route path="vendors" element={<AdminVendors />} />
+            </Route>
 
-          <Route path="/vendor" element={<VendorLayout />}>
-            <Route index element={<VendorDashboard />} />
-            <Route path="ads" element={<VendorAds />} />
-            <Route path="ads-payment" element={<VendorAdsPayment />} />
-            <Route path="products" element={<VendorProducts />} />
-            <Route path="products-payment" element={<VendorProductsPayment />} />
-            <Route path="subscription" element={<VendorSubscription />} />
-          </Route>
+            <Route path="/vendor" element={<VendorLayout />}>
+              <Route index element={<VendorDashboard />} />
+              <Route path="ads" element={<VendorAds />} />
+              <Route path="ads-payment" element={<VendorAdsPayment />} />
+              <Route path="products" element={<VendorProducts />} />
+              <Route path="products-payment" element={<VendorProductsPayment />} />
+              <Route path="subscription" element={<VendorSubscription />} />
+            </Route>
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </QueryClientProvider>
   )
 }
 
 export default App
+
+
+
