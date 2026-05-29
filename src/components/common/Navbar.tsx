@@ -24,8 +24,6 @@ export default function Navbar() {
         { name: t('nav.home', 'الرئيسية'), path: '/' },
         { name: t('nav.categories', 'الأقسام'), path: '/categories', hasDropdown: true },
         { name: t('nav.orders', 'الطلبات'), path: '/orders' },
-        { name: t('nav.offers', 'العروض'), path: '/offers' },
-        { name: t('nav.chats', 'المحادثات'), path: '/chats' },
     ]
 
     return (
@@ -39,7 +37,7 @@ export default function Navbar() {
 
                         {/* Right: Logo */}
                         <Link to="/" className="flex-shrink-0 hidden sm:block">
-                            <div className="h-14 w-20 overflow-hidden rounded-lg border border-slate-200 bg-slate-900">
+                            <div className="h-14 w-14 overflow-hidden rounded-lg">
                                 <img
                                     src="/logo1.png"
                                     alt="Logo"
@@ -72,26 +70,6 @@ export default function Navbar() {
 
                         {/* Left: Location + User/Auth + Language */}
                         <div className="flex items-center gap-4">
-
-                            {/* Location */}
-                            <button
-                                type="button"
-                                className="hidden md:flex items-center gap-1.5 text-right group"
-                                aria-label="Change location"
-                            >
-                                <div className="flex flex-col items-end leading-tight">
-                                    <span className="text-xs text-slate-400 font-medium">
-                                        {t('nav.location', 'الموقع الجغرافي')}
-                                    </span>
-                                    <span className="text-sm font-semibold text-slate-700 group-hover:text-red-600 transition-colors">
-                                        {t('nav.city', 'الرياض، السعودية')}
-                                    </span>
-                                </div>
-                                <MapPin size={18} className="text-red-500 flex-shrink-0" />
-                            </button>
-
-                            {/* Divider */}
-                            <div className="hidden md:block h-8 w-px bg-slate-200" />
 
                             {/* Language Switcher */}
                             <LanguageSwitcher />
@@ -208,16 +186,6 @@ export default function Navbar() {
                             >
                                 {isOpen ? <X size={22} /> : <Menu size={22} />}
                             </button>
-
-                            {/* Mobile Search Toggle */}
-                            <button
-                                type="button"
-                                onClick={() => setSearchMobile(!searchMobile)}
-                                className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-600 transition-all hover:border-red-400 hover:text-red-600"
-                                aria-label="Search"
-                            >
-                                <Search size={20} />
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -245,11 +213,6 @@ export default function Navbar() {
       ══════════════════════════════════════════════ */}
             {isOpen && (
                 <div className="border-b border-slate-100 bg-white lg:hidden" dir="rtl">
-                    {/* Location row */}
-                    <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-100 text-sm text-slate-600">
-                        <MapPin size={16} className="text-red-500" />
-                        <span>{t('nav.city', 'الرياض، السعودية')}</span>
-                    </div>
 
                     {/* Nav Links */}
                     <div className="flex flex-col px-2 py-2">
