@@ -7,9 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../co
 
 export default function VerifyOtp() {
     const location = useLocation()
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
     const phone = location.state?.phone as string | undefined
-    const lang = i18n.language?.startsWith('en') ? 'en' : 'ar'
 
     if (!phone) return <Navigate to="/login" replace />
 

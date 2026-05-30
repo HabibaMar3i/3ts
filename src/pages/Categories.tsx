@@ -12,22 +12,19 @@ export default function Categories() {
     const [selectedCategory, setSelectedCategory] = useState<{ id: number; name: string } | null>(null)
     const categoriesToastShown = useRef(false)
 
-    const { data: mainCategories = [], isLoading: mainLoading } = useQuery<Category[], Error>({
+    const { data: mainCategories, isLoading: mainLoading } = useQuery<Category[]>({
         queryKey: ['main-categories'],
         queryFn: () => getMainCategoriesApi(),
-        onError: () => {
-            toast.error(t('toast.categoriesLoadError'))
-        },
     })
 
-    const { data: subCategories = [], isLoading: subLoading } = useQuery<Category[], Error>({
+    const { data: subCategories, isLoading: subLoading } = useQuery<Category[]>({
         queryKey: ['sub-categories', selectedCategory?.id],
         queryFn: () => getSubCategoriesApi(selectedCategory!.id),
         enabled: !!selectedCategory,
-        onError: () => {
-            toast.error(t('toast.categoriesLoadError'))
-        },
     })
+
+    const safeMain = mainCategories ?? []
+    const safeSub = subCategories ?? []
 
     useEffect(() => {
         if (!mainLoading && !categoriesToastShown.current) {
@@ -90,7 +87,7 @@ export default function Categories() {
                             <div className="flex justify-center py-20">
                                 <div className="h-10 w-10 animate-spin rounded-full border-4 border-red-600 border-t-transparent" />
                             </div>
-                        ) : subCategories.length === 0 ? (
+                        ) : safeSub.length === 0 ? (
                             <div className="flex flex-col items-center justify-center py-20 text-center">
                                 <p className="text-slate-500">{t('categories.noSubCategories')}</p>
                                 <Link
@@ -111,7 +108,7 @@ export default function Categories() {
                                     <p className="text-sm font-bold text-red-700">{t('categories.allProductsInCategory', { name: selectedCategory.name })}</p>
                                 </Link>
 
-                                {subCategories.map((sub) => (
+                                {safeSub.map((sub) => (
                                     <Link
                                         key={sub.id}
                                         to={`/products?category=${sub.id}`}
@@ -135,7 +132,7 @@ export default function Categories() {
                 ) : (
                     /* Main categories grid */
                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                        {mainCategories.map((cat) => (
+                        {safeMain.map((cat) => (
                             <button
                                 key={cat.id}
                                 onClick={() => {
