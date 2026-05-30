@@ -117,9 +117,9 @@ function OtpStep() {
         if (!/^\d?$/.test(char)) return
         const digits = otpValue.split('')
         digits[index] = char
-        const newOtp = digits.join('').slice(0, 6)
+        const newOtp = digits.join('').slice(0, 4)
         setValue('otp', newOtp.padEnd(6, '').trimEnd())
-        if (char && index < 5) inputRefs.current[index + 1]?.focus()
+        if (char && index < 3) inputRefs.current[index + 1]?.focus()
     }
 
     const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
@@ -164,7 +164,7 @@ function OtpStep() {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
                     {/* OTP Inputs */}
                     <div className="flex justify-center gap-3" dir="ltr">
-                        {Array.from({ length: 6 }).map((_, i) => (
+                        {Array.from({ length: 4 }).map((_, i) => (
                             <input
                                 key={i}
                                 ref={(el) => { inputRefs.current[i] = el }}
@@ -203,7 +203,7 @@ function OtpStep() {
 
                     <Button
                         type="submit"
-                        disabled={isVerifyingOtp || otpValue.length < 6}
+                        disabled={isVerifyingOtp || otpValue.length < 4}
                         className="w-full rounded-full px-5 py-3 text-base font-semibold disabled:opacity-70"
                     >
                         {isVerifyingOtp

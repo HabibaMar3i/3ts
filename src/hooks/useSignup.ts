@@ -1,31 +1,60 @@
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { signupApi, type SignupPayload, type SignupResponse } from '../api/auth.api'
+import { toast } from 'react-hot-toast'
+import { signupApi, type SignupResponse } from '../api/auth.api'
+import { getCitiesApi } from '../api/cities.api'
+import type { SignupFormValues } from '../schemas/auth.schema'
 
-type SignupError = AxiosError<{ message?: string }>
+type SignupError = AxiosError<{ message?: string; errors?: Record<string, string[]> }>
 
 export const useSignup = () => {
     const [serverError, setServerError] = useState('')
+    const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null)
+    const [geoError, setGeoError] = useState('')
 
-    const { mutate, isPending, isSuccess, reset: resetMutation } = useMutation({
+    const { data: cities = [], isLoading: citiesLoading } = useQuery({
+        queryKey: ['cities'],
+        queryFn: getCitiesApi,
+    })
+
+    const getLocation = () => {
+        if (!navigator.geolocation) {
+            setGeoError('Geolocation not supported')
+            return
+        }
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+                setGeoError('')
+            },
+            () => setGeoError('Could not get location. Please try again.')
+        )
+    }
+
+    const { mutate, isPending, isSuccess } = useMutation({
         mutationFn: signupApi,
         onSuccess: (_data: SignupResponse) => {
             setServerError('')
+            toast.success('Signed up successfully')
         },
         onError: (error: SignupError) => {
             const msg =
                 error.response?.data?.message ||
-                error.message ||
                 'Something went wrong. Please try again.'
             setServerError(msg)
+            toast.error(msg)
         },
     })
 
-    const signup = (payload: SignupPayload) => {
+    const signup = (payload: SignupFormValues) => {
+        if (!coords) {
+            setGeoError('Please get your location first')
+            return
+        }
         setServerError('')
-        mutate(payload)
+        mutate({ ...payload, lat: coords.lat, lng: coords.lng })
     }
 
-    return { signup, isPending, isSuccess, serverError, resetMutation }
+    return { signup, isPending, isSuccess, serverError, cities, citiesLoading, coords, geoError, getLocation }
 }

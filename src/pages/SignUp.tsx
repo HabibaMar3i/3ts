@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signupSchema, type SignupFormValues } from '../schemas/auth.schema'
 import { useSignup } from '../hooks/useSignup'
@@ -8,55 +9,31 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 
-const LOCATIONS = ['Cairo', 'Alexandria', 'Giza', 'Luxor', 'Aswan']
-const CITIES: Record<string, string[]> = {
-    Cairo: ['Nasr City', 'Maadi', 'Heliopolis', 'New Cairo'],
-    Alexandria: ['Smouha', 'Montazah', 'Agami'],
-    Giza: ['6th of October', 'Sheikh Zayed', 'Dokki'],
-    Luxor: ['East Bank', 'West Bank'],
-    Aswan: ['Aswan City', 'Kom Ombo'],
-}
-
 export default function SignUp() {
     const { t } = useTranslation()
-    const { signup, isPending, isSuccess, serverError } = useSignup()
+    const { signup, isPending, isSuccess, serverError, cities, citiesLoading, coords, geoError, getLocation } = useSignup()
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        reset,
-        formState: { errors },
-    } = useForm<SignupFormValues>({
-        resolver: zodResolver(signupSchema),
-        defaultValues: {
-            name: '',
-            phone: '',
-            email: '',
-            location: '',
-            city: '',
-            password: '',
-            confirm: '',
-        },
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<SignupFormValues>({
+        resolver: zodResolver(signupSchema) as Resolver<SignupFormValues>,
+        defaultValues: { name: '', phone: '', email: '', password: '', confirm: '', city_id: 0, map_desc: '' },
     })
 
-    const selectedLocation = watch('location')
+    useEffect(() => {
+        if (isSuccess) reset()
+    }, [isSuccess, reset])
 
-    const onSubmit = (values: SignupFormValues) => {
-        signup(values)
-        reset()
-    }
+    const handleSignupSubmit = (values: SignupFormValues) => signup({ ...values })
 
-    const fieldClass = (hasError: boolean) =>
-        `w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 ${hasError ? 'border-red-400 focus-visible:ring-red-400' : ''
-        }`
+    const fc = (hasError: boolean) =>
+        `w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 ${hasError ? 'border-red-400' : ''}`
 
     return (
         <div className="min-h-screen bg-slate-50 py-16">
             <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 sm:px-6 lg:px-8">
                 <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-center">
 
-                    <section className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm shadow-slate-200/50">
+                    {/* Hero panel — keep yours exactly as is */}
+                    <section className="space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
                         <span className="inline-flex items-center rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-700">
                             {t('auth.signup.joinUs')}
                         </span>
@@ -64,27 +41,15 @@ export default function SignUp() {
                             <h1 className="text-4xl font-bold text-slate-950">{t('auth.signup.title')}</h1>
                             <p className="max-w-xl text-slate-600">{t('auth.signup.heroDesc')}</p>
                         </div>
-                        <div className="grid gap-4 sm:grid-cols-2">
-                            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 text-center">
-                                <p className="text-sm text-slate-500">{t('auth.signup.fasterSignup')}</p>
-                                <p className="mt-2 text-2xl font-bold text-red-600">{t('auth.signup.effortless')}</p>
-                            </div>
-                            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-5 text-center">
-                                <p className="text-sm text-slate-500">{t('auth.signup.accountProtection')}</p>
-                                <p className="mt-2 text-2xl font-bold text-red-600">{t('auth.signup.safeFast')}</p>
-                            </div>
-                        </div>
                     </section>
 
-                    <Card className="rounded-3xl border border-slate-200 bg-white p-0 shadow-sm shadow-slate-200/50">
+                    <Card className="rounded-3xl border border-slate-200 bg-white p-0 shadow-sm">
                         <CardHeader className="px-6 py-8 sm:px-8">
-                            <div className="space-y-2">
-                                <CardTitle className="text-3xl">{t('auth.signup.formTitle')}</CardTitle>
-                                <CardDescription>{t('auth.signup.formDesc')}</CardDescription>
-                            </div>
+                            <CardTitle className="text-3xl">{t('auth.signup.formTitle')}</CardTitle>
+                            <CardDescription>{t('auth.signup.formDesc')}</CardDescription>
                         </CardHeader>
 
-                        <CardContent className="space-y-5 px-6 pb-6 sm:px-8">
+                        <CardContent className="space-y-4 px-6 pb-6 sm:px-8">
                             {isSuccess && (
                                 <div className="rounded-2xl border border-green-200 bg-green-50 p-4 text-sm text-green-700">
                                     {t('auth.signup.success')}
@@ -96,93 +61,93 @@ export default function SignUp() {
                                 </div>
                             )}
 
-                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+                            <form onSubmit={handleSubmit(handleSignupSubmit)} className="space-y-4" noValidate>
+
+                                {/* Profile Image */}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-semibold text-slate-900">{t('auth.signup.profileImageOptional')}</label>
+                                    <input type="file" accept="image/*"
+                                        onChange={(e) => { if (e.target.files?.[0]) setValue('image', e.target.files[0]) }}
+                                        className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm" />
+                                </div>
 
                                 {/* Name */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="name">
-                                        {t('auth.signup.fullName')}
-                                    </label>
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="name">{t('auth.signup.fullName')}</label>
                                     <Input id="name" type="text" placeholder={t('auth.signup.fullNamePlaceholder')}
-                                        className={fieldClass(!!errors.name)} {...register('name')} />
+                                        className={fc(!!errors.name)} {...register('name')} />
                                     {errors.name && <p className="text-xs text-red-600">{errors.name.message}</p>}
                                 </div>
 
-                                {/* Phone */}
+                                {/* Phone — 9 digits, backend adds country code */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="phone">
-                                        {t('auth.signup.phone', 'Phone Number')}
-                                    </label>
-                                    <Input id="phone" type="tel" placeholder="+20 100 000 0000"
-                                        className={fieldClass(!!errors.phone)} {...register('phone')} />
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="phone">{t('auth.signup.phoneNumber')}</label>
+                                    <div className="flex gap-2">
+                                        <span className="flex items-center rounded-xl border border-slate-200 bg-slate-100 px-3 text-sm text-slate-500">+966</span>
+                                        <Input id="phone" type="tel" placeholder={t('auth.signup.phonePlaceholder', '512345678')}
+                                            className={fc(!!errors.phone)} {...register('phone')} />
+                                    </div>
                                     {errors.phone && <p className="text-xs text-red-600">{errors.phone.message}</p>}
                                 </div>
 
                                 {/* Email */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="email">
-                                        {t('auth.signup.email')}
-                                    </label>
-                                    <Input id="email" type="email" placeholder="example@3ts.com"
-                                        className={fieldClass(!!errors.email)} {...register('email')} />
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="email">{t('auth.signup.emailOptional')}</label>
+                                    <Input id="email" type="email" placeholder={t('auth.signup.emailPlaceholder', 'example@email.com')}
+                                        className={fc(!!errors.email)} {...register('email')} />
                                     {errors.email && <p className="text-xs text-red-600">{errors.email.message}</p>}
-                                </div>
-
-                                {/* Location */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="location">
-                                        {t('auth.signup.location', 'Location')}
-                                    </label>
-                                    <select id="location"
-                                        className={`w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500 ${errors.location ? 'border-red-400' : ''}`}
-                                        {...register('location')}>
-                                        <option value="">{t('auth.signup.selectLocation', 'Select location')}</option>
-                                        {LOCATIONS.map((loc) => (
-                                            <option key={loc} value={loc}>{loc}</option>
-                                        ))}
-                                    </select>
-                                    {errors.location && <p className="text-xs text-red-600">{errors.location.message}</p>}
                                 </div>
 
                                 {/* City */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="city">
-                                        {t('auth.signup.city', 'City')}
-                                    </label>
-                                    <select id="city"
-                                        className={`w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500 ${errors.city ? 'border-red-400' : ''}`}
-                                        {...register('city')}>
-                                        <option value="">{t('auth.signup.selectCity', 'Select city')}</option>
-                                        {(CITIES[selectedLocation] ?? []).map((city) => (
-                                            <option key={city} value={city}>{city}</option>
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="city_id">{t('auth.signup.city')}</label>
+                                    <select id="city_id" className={fc(!!errors.city_id)}
+                                        {...register('city_id', { valueAsNumber: true })}>
+                                        <option value="">{citiesLoading ? t('auth.signup.loadingCities', 'Loading cities...') : t('auth.signup.selectCity')}</option>
+                                        {cities.map((c) => (
+                                            <option key={c.id} value={c.id}>{c.name}</option>
                                         ))}
                                     </select>
-                                    {errors.city && <p className="text-xs text-red-600">{errors.city.message}</p>}
+                                    {errors.city_id && <p className="text-xs text-red-600">{errors.city_id.message}</p>}
+                                </div>
+
+                                {/* Location */}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-semibold text-slate-900">{t('auth.signup.yourLocation')}</label>
+                                    <Button type="button" onClick={getLocation}
+                                        className="w-full rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100">
+                                        {coords ? `📍 ${t('auth.signup.locationCaptured')}` : t('auth.signup.getLocation')}
+                                    </Button>
+                                    {geoError && <p className="text-xs text-red-600">{geoError}</p>}
+                                </div>
+
+                                {/* Map description */}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="map_desc">{t('auth.signup.addressDescription')}</label>
+                                    <Input id="map_desc" type="text" placeholder={t('auth.signup.addressDescriptionPlaceholder', 'e.g. Riyadh, Al Olaya district')}
+                                        className={fc(!!errors.map_desc)} {...register('map_desc')} />
+                                    {errors.map_desc && <p className="text-xs text-red-600">{errors.map_desc.message}</p>}
                                 </div>
 
                                 {/* Password */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="password">
-                                        {t('auth.signup.password')}
-                                    </label>
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="password">{t('auth.signup.password')}</label>
                                     <Input id="password" type="password" placeholder={t('auth.signup.passwordPlaceholder')}
-                                        className={fieldClass(!!errors.password)} {...register('password')} />
+                                        className={fc(!!errors.password)} {...register('password')} />
                                     {errors.password && <p className="text-xs text-red-600">{errors.password.message}</p>}
                                 </div>
 
                                 {/* Confirm Password */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="confirm">
-                                        {t('auth.signup.confirmPassword')}
-                                    </label>
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="confirm">{t('auth.signup.confirmPassword')}</label>
                                     <Input id="confirm" type="password" placeholder={t('auth.signup.confirmPasswordPlaceholder')}
-                                        className={fieldClass(!!errors.confirm)} {...register('confirm')} />
+                                        className={fc(!!errors.confirm)} {...register('confirm')} />
                                     {errors.confirm && <p className="text-xs text-red-600">{errors.confirm.message}</p>}
                                 </div>
 
                                 <Button type="submit" disabled={isPending}
                                     className="w-full rounded-full px-5 py-3 text-base font-semibold disabled:opacity-70">
-                                    {isPending ? t('auth.signup.loading', 'Creating account…') : t('auth.signup.submit')}
+                                    {isPending ? t('auth.signup.creatingAccount', 'Creating account…') : t('auth.signup.submit')}
                                 </Button>
                             </form>
                         </CardContent>
