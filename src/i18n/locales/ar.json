@@ -28,6 +28,28 @@
     "signup": "إنشاء حساب",
     "menu": "القائمة"
   },
+  "toast": {
+    "homeLoaded": "تم تحميل الصفحة الرئيسية بنجاح.",
+    "categoriesLoaded": "تم تحميل الأقسام بنجاح.",
+    "categorySelected": "عرض {{name}}.",
+    "categoryCleared": "عرض جميع الأقسام.",
+    "homeLoadError": "تعذّر تحميل الصفحة الرئيسية. حاول مرة أخرى.",
+    "categoriesLoadError": "تعذّر تحميل الأقسام. حاول مرة أخرى."
+  },
+  "home": {
+    "categoriesSectionTitle": "الأقسام",
+    "latestProductsSectionTitle": "أحدث المنتجات",
+    "viewAll": "عرض الكل",
+    "discountLabel": "خصم"
+  },
+  "categories": {
+    "categoryLabel": "الأقسام",
+    "allCategories": "جميع الأقسام",
+    "backToCategories": "العودة للأقسام",
+    "noSubCategories": "لا توجد أقسام فرعية",
+    "viewProducts": "عرض منتجات {{name}}",
+    "allProductsInCategory": "جميع منتجات {{name}}"
+  },
   "footer": {
     "description": "متجرك الموثوق للألعاب الأصلية والعالية الجودة لجميع الأعمار.",
     "quickLinks": "روابط سريعة",

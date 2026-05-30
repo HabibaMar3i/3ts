@@ -28,6 +28,28 @@
     "signup": "Sign up",
     "menu": "Menu"
   },
+  "toast": {
+    "homeLoaded": "Home loaded successfully.",
+    "categoriesLoaded": "Categories loaded successfully.",
+    "categorySelected": "Showing {{name}}.",
+    "categoryCleared": "Viewing all categories.",
+    "homeLoadError": "Unable to load home content. Please try again.",
+    "categoriesLoadError": "Unable to load categories. Please try again."
+  },
+  "home": {
+    "categoriesSectionTitle": "Categories",
+    "latestProductsSectionTitle": "Latest products",
+    "viewAll": "View all",
+    "discountLabel": "Discount"
+  },
+  "categories": {
+    "categoryLabel": "Categories",
+    "allCategories": "All categories",
+    "backToCategories": "Back to categories",
+    "noSubCategories": "No subcategories found",
+    "viewProducts": "View products of {{name}}",
+    "allProductsInCategory": "All products in {{name}}"
+  },
   "footer": {
     "description": "Your trusted store for original, high-quality games for all ages.",
     "quickLinks": "Quick links",

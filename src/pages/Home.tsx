@@ -1,11 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { toast } from 'react-hot-toast'
 import { useHome } from '../hooks/useHome'
 import { ChevronLeft, ChevronRight, Star, Heart } from 'lucide-react'
 
 export default function Home() {
+    const { t } = useTranslation()
     const { sliders, categories, latestProducts, isLoading } = useHome()
     const [currentSlide, setCurrentSlide] = useState(0)
+    const homeToastShown = useRef(false)
+
+    useEffect(() => {
+        if (!isLoading && !homeToastShown.current) {
+            toast.success(t('toast.homeLoaded'))
+            homeToastShown.current = true
+        }
+    }, [isLoading, t])
 
     const prevSlide = () => setCurrentSlide((p) => (p === 0 ? sliders.length - 1 : p - 1))
     const nextSlide = () => setCurrentSlide((p) => (p === sliders.length - 1 ? 0 : p + 1))
@@ -73,9 +84,9 @@ export default function Home() {
                 {categories.length > 0 && (
                     <section>
                         <div className="mb-6 flex items-center justify-between">
-                            <h2 className="text-xl font-bold text-slate-900">الأقسام</h2>
+                            <h2 className="text-xl font-bold text-slate-900">{t('home.categoriesSectionTitle')}</h2>
                             <Link to="/products" className="text-sm font-semibold text-red-600 hover:text-red-700">
-                                عرض الكل
+                                {t('home.viewAll')}
                             </Link>
                         </div>
                         <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
@@ -101,9 +112,9 @@ export default function Home() {
                 {latestProducts.length > 0 && (
                     <section>
                         <div className="mb-6 flex items-center justify-between">
-                            <h2 className="text-xl font-bold text-slate-900">أحدث المنتجات</h2>
+                            <h2 className="text-xl font-bold text-slate-900">{t('home.latestProductsSectionTitle')}</h2>
                             <Link to="/products" className="text-sm font-semibold text-red-600 hover:text-red-700">
-                                عرض الكل
+                                {t('home.viewAll')}
                             </Link>
                         </div>
                         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -128,7 +139,7 @@ export default function Home() {
                                     {/* Discount badge */}
                                     {product.has_discount && (
                                         <span className="mb-1 inline-block rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600">
-                                            خصم
+                                            {t('home.discountLabel')}
                                         </span>
                                     )}
 
