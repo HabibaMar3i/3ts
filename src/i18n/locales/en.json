@@ -34,7 +34,8 @@
     "categorySelected": "Showing {{name}}.",
     "categoryCleared": "Viewing all categories.",
     "homeLoadError": "Unable to load home content. Please try again.",
-    "categoriesLoadError": "Unable to load categories. Please try again."
+    "categoriesLoadError": "Unable to load categories. Please try again.",
+    "productsLoadError": "Unable to load products. Please try again."
   },
   "home": {
     "categoriesSectionTitle": "Categories",
@@ -49,6 +50,15 @@
     "noSubCategories": "No subcategories found",
     "viewProducts": "View products of {{name}}",
     "allProductsInCategory": "All products in {{name}}"
+  },
+  "products": {
+    "allCategories": "All",
+    "searchPlaceholder": "Search for a product...",
+    "noResults": "No products found",
+    "tryChanging": "Try changing the filter or search",
+    "discount": "Discount",
+    "previous": "Previous",
+    "next": "Next"
   },
   "footer": {
     "description": "Your trusted store for original, high-quality games for all ages.",

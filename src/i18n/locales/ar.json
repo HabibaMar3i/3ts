@@ -34,7 +34,8 @@
     "categorySelected": "عرض {{name}}.",
     "categoryCleared": "عرض جميع الأقسام.",
     "homeLoadError": "تعذّر تحميل الصفحة الرئيسية. حاول مرة أخرى.",
-    "categoriesLoadError": "تعذّر تحميل الأقسام. حاول مرة أخرى."
+    "categoriesLoadError": "تعذّر تحميل الأقسام. حاول مرة أخرى.",
+    "productsLoadError": "تعذّر تحميل المنتجات. حاول مرة أخرى."
   },
   "home": {
     "categoriesSectionTitle": "الأقسام",
@@ -49,6 +50,15 @@
     "noSubCategories": "لا توجد أقسام فرعية",
     "viewProducts": "عرض منتجات {{name}}",
     "allProductsInCategory": "جميع منتجات {{name}}"
+  },
+  "products": {
+    "allCategories": "الكل",
+    "searchPlaceholder": "ابحث عن منتج...",
+    "noResults": "لا توجد منتجات",
+    "tryChanging": "جرب تغيير الفلتر أو البحث",
+    "discount": "خصم",
+    "previous": "السابق",
+    "next": "التالي"
   },
   "footer": {
     "description": "متجرك الموثوق للألعاب الأصلية والعالية الجودة لجميع الأعمار.",

@@ -1,10 +1,12 @@
 import { Link, useSearchParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useProducts } from '../hooks/useProducts'
 import { Star, Heart, ShoppingCart, ChevronRight } from 'lucide-react'
 import { Input } from '../components/ui/input'
 import { Button } from '../components/ui/button'
 
 export default function Products() {
+    const { t } = useTranslation()
     const [searchParams] = useSearchParams()
     const categoryFromUrl = searchParams.get('category')
 
@@ -20,18 +22,18 @@ export default function Products() {
             <div className="bg-white border-b border-slate-100 px-4 py-6 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-7xl">
                     <div className="flex items-center gap-2 text-sm text-slate-500 mb-2">
-                        <Link to="/" className="hover:text-red-600">الرئيسية</Link>
+                        <Link to="/" className="hover:text-red-600">{t('nav.home')}</Link>
                         <ChevronRight size={14} className="rtl:rotate-180" />
-                        <span className="text-slate-800 font-semibold">المنتجات</span>
+                        <span className="text-slate-800 font-semibold">{t('nav.products')}</span>
                     </div>
-                    <h1 className="text-2xl font-bold text-slate-900">المنتجات</h1>
+                    <h1 className="text-2xl font-bold text-slate-900">{t('nav.products')}</h1>
                 </div>
             </div>
 
             <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
 
                 <div className="mb-6">
-                    <Input type="search" placeholder="ابحث عن منتج..." value={search}
+                    <Input type="search" placeholder={t('products.searchPlaceholder')} value={search}
                         onChange={(e) => changeSearch(e.target.value)}
                         className="max-w-sm rounded-full border-slate-200" />
                 </div>
@@ -39,7 +41,7 @@ export default function Products() {
                 <div className="mb-6 flex flex-wrap gap-2">
                     <Button size="sm" variant={selectedCategory === null ? 'default' : 'outline'}
                         className="rounded-full" onClick={() => changeCategory(null)}>
-                        الكل
+                        {t('products.allCategories')}
                     </Button>
                     {categories.map((cat) => (
                         <Button key={cat.id} size="sm"
@@ -56,8 +58,8 @@ export default function Products() {
                     </div>
                 ) : products.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-20 text-center">
-                        <p className="text-lg font-semibold text-slate-700">لا توجد منتجات</p>
-                        <p className="text-sm text-slate-500 mt-1">جرب تغيير الفلتر أو البحث</p>
+                        <p className="text-lg font-semibold text-slate-700">{t('products.noResults')}</p>
+                        <p className="text-sm text-slate-500 mt-1">{t('products.tryChanging')}</p>
                     </div>
                 ) : (
                     <>
@@ -79,7 +81,7 @@ export default function Products() {
                                     </div>
 
                                     {product.has_discount && (
-                                        <span className="mb-1 inline-block rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600">خصم</span>
+                                        <span className="mb-1 inline-block rounded-full bg-red-50 px-2 py-0.5 text-xs font-bold text-red-600">{t('products.discount')}</span>
                                     )}
 
                                     <p className="text-sm font-semibold text-slate-800 line-clamp-2 leading-snug">{product.title}</p>
@@ -108,9 +110,9 @@ export default function Products() {
 
                         {lastPage > 1 && (
                             <div className="mt-8 flex justify-center gap-2">
-                                <Button variant="outline" disabled={page === 1} onClick={() => setPage(p => p - 1)} className="rounded-full">السابق</Button>
+                                <Button variant="outline" disabled={page === 1} onClick={() => setPage(p => p - 1)} className="rounded-full">{t('products.previous')}</Button>
                                 <span className="flex items-center px-4 text-sm text-slate-600">{page} / {lastPage}</span>
-                                <Button variant="outline" disabled={page === lastPage} onClick={() => setPage(p => p + 1)} className="rounded-full">التالي</Button>
+                                <Button variant="outline" disabled={page === lastPage} onClick={() => setPage(p => p + 1)} className="rounded-full">{t('products.next')}</Button>
                             </div>
                         )}
                     </>
