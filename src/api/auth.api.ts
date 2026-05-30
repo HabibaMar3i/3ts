@@ -90,3 +90,39 @@ export const signupApi = async (payload: SignupFormValues & { lat: number; lng: 
         })
     return data
 }
+
+export interface OtpResponse {
+    key: string
+    msg: string
+    data?: {
+        id: number
+        name: string
+        email: string | null
+        phone: string
+        image: string | null
+        lang: string
+        token: string
+        city: { id: number; name: string } | null
+    }
+}
+
+export const activateApi = async (payload: { phone: string; code: string }): Promise<OtpResponse> => {
+    const form = new FormData()
+    form.append('phone', payload.phone)
+    form.append('code', payload.code)
+    form.append('country_code', '966')
+    form.append('device_id', getDeviceId())
+    form.append('device_type', getDeviceType())
+
+    const { data } = await axiosInstance.post<OtpResponse>('/activate?_method=patch', form)
+    return data
+}
+
+export const resendCodeApi = async (phone: string): Promise<{ key: string; msg: string }> => {
+    const form = new FormData()
+    form.append('phone', phone)
+    form.append('country_code', '966')
+
+    const { data } = await axiosInstance.post('/resend-code', form)
+    return data
+}
