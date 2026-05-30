@@ -13,7 +13,7 @@ export default function VerifyOtp() {
 
     if (!phone) return <Navigate to="/login" replace />
 
-    const { activate, isPending, resend, isResending, serverError, resendMsg } = useOtp(phone, lang)
+    const { activate, isPending, resend, isResending, serverError, resendMsg } = useOtp(phone)
     const [digits, setDigits] = useState(['', '', '', ''])
     const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)]
 

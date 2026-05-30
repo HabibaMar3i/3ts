@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useForm } from 'react-hook-form'
+import { useForm, type Resolver } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signupSchema, type SignupFormValues } from '../schemas/auth.schema'
 import { useSignup } from '../hooks/useSignup'
@@ -10,20 +10,19 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 
 export default function SignUp() {
-    const { t, i18n } = useTranslation()
-    const lang = i18n.language?.startsWith('en') ? 'en' : 'ar'
+    const { t } = useTranslation()
     const { signup, isPending, isSuccess, serverError, cities, citiesLoading, coords, geoError, getLocation } = useSignup()
 
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<SignupFormValues>({
-        resolver: zodResolver(signupSchema),
-        defaultValues: { name: '', phone: '', email: '', password: '', confirm: '', map_desc: '' },
+        resolver: zodResolver(signupSchema) as Resolver<SignupFormValues>,
+        defaultValues: { name: '', phone: '', email: '', password: '', confirm: '', city_id: 0, map_desc: '' },
     })
 
     useEffect(() => {
         if (isSuccess) reset()
     }, [isSuccess, reset])
 
-    const handleSignupSubmit = (values: SignupFormValues) => signup({ ...values, lang })
+    const handleSignupSubmit = (values: SignupFormValues) => signup({ ...values })
 
     const fc = (hasError: boolean) =>
         `w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 ${hasError ? 'border-red-400' : ''}`
