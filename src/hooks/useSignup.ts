@@ -7,7 +7,6 @@ import { getCitiesApi } from '../api/cities.api'
 import type { SignupFormValues } from '../schemas/auth.schema'
 
 type SignupError = AxiosError<{ message?: string; errors?: Record<string, string[]> }>
-type SignupPayload = SignupFormValues & { lat: number; lng: number }
 
 export const useSignup = () => {
     const [serverError, setServerError] = useState('')

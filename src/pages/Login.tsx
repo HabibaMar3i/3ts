@@ -9,8 +9,7 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 
 export default function Login() {
-  const { t, i18n } = useTranslation()
-  const lang = i18n.language?.startsWith('en') ? 'en' : 'ar'
+  const { t } = useTranslation()
   const { login, isPending, serverError } = useLogin()
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
@@ -21,7 +20,7 @@ export default function Login() {
   const fc = (hasError: boolean) =>
     `w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 ${hasError ? 'border-red-400' : ''}`
 
-  const handleLoginSubmit = (values: LoginFormValues) => login({ ...values, lang })
+  const handleLoginSubmit = (values: LoginFormValues) => login({ ...values })
 
   return (
     <div className="min-h-screen bg-slate-50 py-16">
