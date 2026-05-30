@@ -15,3 +15,12 @@ export const getDeviceType = (): 'ios' | 'android' | 'web' => {
   if (/Android/i.test(ua)) return 'android'
   return 'web'
 }
+
+export const getMacAddress = (): string => {
+  let mac = localStorage.getItem('mac_address')
+  if (!mac) {
+    mac = uuidv4()
+    localStorage.setItem('mac_address', mac)
+  }
+  return mac
+}

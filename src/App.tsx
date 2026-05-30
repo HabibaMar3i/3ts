@@ -50,6 +50,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
 import ForgotPassword from './pages/ForgotPassword'
 import VerifyOtp from './pages/VerifyOtp'
+import ProtectedRoute from '#components/common/ProtectedRoute'
+import GuestRoute from '#components/common/GuestRoute'
 
 const queryClient = new QueryClient()
 
@@ -70,26 +72,36 @@ function App() {
         <div className="app-shell">
           <Routes>
             <Route path="/" element={<Layout />}>
+
+              {/* Guest only */}
+              <Route element={<GuestRoute />}>
+                <Route path="login" element={<Login />} />
+                <Route path="signup" element={<SignUp />} />
+                <Route path="forget-password" element={<ForgotPassword />} />
+                <Route path="verify-otp" element={<VerifyOtp />} />
+              </Route>
+
+              {/* Protected */}
+              <Route element={<ProtectedRoute />}>
+                <Route path="profile" element={<Profile />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="orders/made-and-done" element={<OrdersMadeAndDone />} />
+                <Route path="orders/refund" element={<OrdersRefund />} />
+                <Route path="checkout" element={<Checkout />} />
+              </Route>
+
+              {/* Public */}
               <Route index element={<Home />} />
               <Route path="about" element={<About />} />
               <Route path="services" element={<Services />} />
               <Route path="products" element={<Products />} />
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="cart" element={<Cart />} />
-              <Route path="checkout" element={<Checkout />} />
               <Route path="wishlist" element={<Wishlist />} />
-              <Route path="orders" element={<Orders />} />
-              <Route path="orders/made-and-done" element={<OrdersMadeAndDone />} />
-              <Route path="orders/refund" element={<OrdersRefund />} />
-              <Route path="profile" element={<Profile />} />
               <Route path="contact" element={<Contact />} />
               <Route path="feedback" element={<Feedback />} />
               <Route path="privacy-policy" element={<PrivacyPolicy />} />
               <Route path="terms-of-service" element={<TermsOfService />} />
-              <Route path="login" element={<Login />} />
-              <Route path="signup" element={<SignUp />} />
-              <Route path="forget-password" element={<ForgotPassword />} />
-              <Route path="verify-otp" element={<VerifyOtp />} />
             </Route>
 
             <Route path="/admin" element={<AdminLayout />}>

@@ -11,5 +11,10 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   config.headers['lang'] = i18n.language || 'ar'
+  
+  const auth = JSON.parse(localStorage.getItem('auth-storage') || '{}')
+  const token = auth?.state?.token
+  if (token) config.headers['Authorization'] = `Bearer ${token}`
+  
   return config
 })
