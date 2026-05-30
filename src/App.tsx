@@ -48,6 +48,7 @@ import VendorProductsPayment from './pages/vendor/ProductsPayment'
 import VendorSubscription from './pages/vendor/Subscription'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ForgotPassword from './pages/ForgotPassword'
+import VerifyOtp from './pages/VerifyOtp'
 
 const queryClient = new QueryClient()
 
@@ -86,6 +87,7 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="forget-password" element={<ForgotPassword />} />
+              <Route path="verify-otp" element={<VerifyOtp />} />
             </Route>
 
             <Route path="/admin" element={<AdminLayout />}>
