@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { toast } from 'react-hot-toast'
 import { signupApi, type SignupResponse } from '../api/auth.api'
 import { getCitiesApi } from '../api/cities.api'
 import type { SignupFormValues } from '../schemas/auth.schema'
@@ -36,12 +37,14 @@ export const useSignup = () => {
         mutationFn: signupApi,
         onSuccess: (_data: SignupResponse) => {
             setServerError('')
+            toast.success('Signed up successfully')
         },
         onError: (error: SignupError) => {
             const msg =
                 error.response?.data?.message ||
                 'Something went wrong. Please try again.'
             setServerError(msg)
+            toast.error(msg)
         },
     })
 

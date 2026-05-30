@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { activateApi, resendCodeApi, type OtpResponse } from '../api/auth.api'
 import { useAuthStore } from '../store/auth.store'
@@ -19,13 +20,18 @@ export const useOtp = (phone: string) => {
             if (data.key === 'success' && data.data) {
                 const { token, ...user } = data.data
                 setAuth(token, user)
+                toast.success('Phone verified successfully')
                 navigate('/')
             } else {
-                setServerError(data.msg)
+                const message = data.msg || 'Invalid code. Please try again.'
+                setServerError(message)
+                toast.error(message)
             }
         },
         onError: (error: OtpError) => {
-            setServerError(error.response?.data?.msg || 'Invalid code. Please try again.')
+            const msg = error.response?.data?.msg || 'Invalid code. Please try again.'
+            setServerError(msg)
+            toast.error(msg)
         },
     })
 
@@ -34,9 +40,12 @@ export const useOtp = (phone: string) => {
         onSuccess: (data) => {
             setResendMsg(data.msg)
             setServerError('')
+            toast.success(data.msg || 'OTP resent successfully')
         },
         onError: (error: OtpError) => {
-            setServerError(error.response?.data?.msg || 'Could not resend code.')
+            const msg = error.response?.data?.msg || 'Could not resend code.'
+            setServerError(msg)
+            toast.error(msg)
         },
     })
 

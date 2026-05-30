@@ -47,6 +47,7 @@ import VendorProducts from './pages/vendor/Products'
 import VendorProductsPayment from './pages/vendor/ProductsPayment'
 import VendorSubscription from './pages/vendor/Subscription'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from 'react-hot-toast'
 import ForgotPassword from './pages/ForgotPassword'
 import VerifyOtp from './pages/VerifyOtp'
 
@@ -65,6 +66,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <LocaleSync />
+        <Toaster />
         <div className="app-shell">
           <Routes>
             <Route path="/" element={<Layout />}>

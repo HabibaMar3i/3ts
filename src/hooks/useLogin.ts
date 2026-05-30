@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 import { loginApi, type LoginResponse } from '../api/auth.api'
 import { useAuthStore } from '../store/auth.store'
 import type { LoginFormValues } from '../schemas/auth.schema'
@@ -18,11 +19,13 @@ export const useLogin = () => {
     onSuccess: (data: LoginResponse, variables: LoginFormValues) => {
       if (data.key === 'needActive') {
         navigate('/verify-otp', { state: { phone: variables.phone } })
+        toast.success('OTP sent to your phone')
         return
       }
       const { token, ...user } = data.data
       setAuth(token, user)
       setServerError('')
+      toast.success('Logged in successfully')
       navigate('/')
     },
     onError: (error: LoginError) => {
@@ -32,6 +35,7 @@ export const useLogin = () => {
         error.message ||
         'Something went wrong.'
       setServerError(msg)
+      toast.error(msg)
     },
   })
 
