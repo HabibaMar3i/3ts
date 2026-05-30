@@ -10,7 +10,8 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 
 export default function SignUp() {
-    const { t } = useTranslation()
+    const { t, i18n } = useTranslation()
+    const lang = i18n.language?.startsWith('en') ? 'en' : 'ar'
     const { signup, isPending, isSuccess, serverError, cities, citiesLoading, coords, geoError, getLocation } = useSignup()
 
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<SignupFormValues>({
@@ -21,6 +22,8 @@ export default function SignUp() {
     useEffect(() => {
         if (isSuccess) reset()
     }, [isSuccess, reset])
+
+    const handleSignupSubmit = (values: SignupFormValues) => signup({ ...values, lang })
 
     const fc = (hasError: boolean) =>
         `w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 ${hasError ? 'border-red-400' : ''}`
@@ -59,11 +62,11 @@ export default function SignUp() {
                                 </div>
                             )}
 
-                            <form onSubmit={handleSubmit(signup)} className="space-y-4" noValidate>
+                            <form onSubmit={handleSubmit(handleSignupSubmit)} className="space-y-4" noValidate>
 
                                 {/* Profile Image */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900">Profile Image (optional)</label>
+                                    <label className="text-sm font-semibold text-slate-900">{t('auth.signup.profileImageOptional')}</label>
                                     <input type="file" accept="image/*"
                                         onChange={(e) => { if (e.target.files?.[0]) setValue('image', e.target.files[0]) }}
                                         className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm" />
@@ -79,10 +82,10 @@ export default function SignUp() {
 
                                 {/* Phone — 9 digits, backend adds country code */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="phone">Phone Number</label>
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="phone">{t('auth.signup.phoneNumber')}</label>
                                     <div className="flex gap-2">
                                         <span className="flex items-center rounded-xl border border-slate-200 bg-slate-100 px-3 text-sm text-slate-500">+966</span>
-                                        <Input id="phone" type="tel" placeholder="512345678"
+                                        <Input id="phone" type="tel" placeholder={t('auth.signup.phonePlaceholder', '512345678')}
                                             className={fc(!!errors.phone)} {...register('phone')} />
                                     </div>
                                     {errors.phone && <p className="text-xs text-red-600">{errors.phone.message}</p>}
@@ -90,18 +93,18 @@ export default function SignUp() {
 
                                 {/* Email */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="email">{t('auth.signup.email')} (optional)</label>
-                                    <Input id="email" type="email" placeholder="example@email.com"
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="email">{t('auth.signup.emailOptional')}</label>
+                                    <Input id="email" type="email" placeholder={t('auth.signup.emailPlaceholder', 'example@email.com')}
                                         className={fc(!!errors.email)} {...register('email')} />
                                     {errors.email && <p className="text-xs text-red-600">{errors.email.message}</p>}
                                 </div>
 
                                 {/* City */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="city_id">City</label>
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="city_id">{t('auth.signup.city')}</label>
                                     <select id="city_id" className={fc(!!errors.city_id)}
                                         {...register('city_id', { valueAsNumber: true })}>
-                                        <option value="">{citiesLoading ? 'Loading cities...' : 'Select city'}</option>
+                                        <option value="">{citiesLoading ? t('auth.signup.loadingCities', 'Loading cities...') : t('auth.signup.selectCity')}</option>
                                         {cities.map((c) => (
                                             <option key={c.id} value={c.id}>{c.name}</option>
                                         ))}
@@ -111,18 +114,18 @@ export default function SignUp() {
 
                                 {/* Location */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900">Your Location</label>
+                                    <label className="text-sm font-semibold text-slate-900">{t('auth.signup.yourLocation')}</label>
                                     <Button type="button" onClick={getLocation}
                                         className="w-full rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100">
-                                        {coords ? `📍 Location captured` : 'Get my location'}
+                                        {coords ? `📍 ${t('auth.signup.locationCaptured')}` : t('auth.signup.getLocation')}
                                     </Button>
                                     {geoError && <p className="text-xs text-red-600">{geoError}</p>}
                                 </div>
 
                                 {/* Map description */}
                                 <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-slate-900" htmlFor="map_desc">Address Description</label>
-                                    <Input id="map_desc" type="text" placeholder="e.g. Riyadh, Al Olaya district"
+                                    <label className="text-sm font-semibold text-slate-900" htmlFor="map_desc">{t('auth.signup.addressDescription')}</label>
+                                    <Input id="map_desc" type="text" placeholder={t('auth.signup.addressDescriptionPlaceholder', 'e.g. Riyadh, Al Olaya district')}
                                         className={fc(!!errors.map_desc)} {...register('map_desc')} />
                                     {errors.map_desc && <p className="text-xs text-red-600">{errors.map_desc.message}</p>}
                                 </div>
@@ -145,7 +148,7 @@ export default function SignUp() {
 
                                 <Button type="submit" disabled={isPending}
                                     className="w-full rounded-full px-5 py-3 text-base font-semibold disabled:opacity-70">
-                                    {isPending ? 'Creating account…' : t('auth.signup.submit')}
+                                    {isPending ? t('auth.signup.creatingAccount', 'Creating account…') : t('auth.signup.submit')}
                                 </Button>
                             </form>
                         </CardContent>

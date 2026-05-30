@@ -7,6 +7,8 @@ import { loginApi, type LoginResponse } from '../api/auth.api'
 import { useAuthStore } from '../store/auth.store'
 import type { LoginFormValues } from '../schemas/auth.schema'
 
+type LoginPayload = LoginFormValues & { lang: string }
+
 type LoginError = AxiosError<{ msg?: string; message?: string }>
 
 export const useLogin = () => {
@@ -14,9 +16,9 @@ export const useLogin = () => {
   const [serverError, setServerError] = useState('')
   const navigate = useNavigate()
 
-  const { mutate, isPending } = useMutation({
+  const { mutate, isPending } = useMutation<LoginResponse, LoginError, LoginPayload>({
     mutationFn: loginApi,
-    onSuccess: (data: LoginResponse, variables: LoginFormValues) => {
+    onSuccess: (data: LoginResponse, variables: LoginPayload) => {
       if (data.key === 'needActive') {
         navigate('/verify-otp', { state: { phone: variables.phone } })
         toast.success('OTP sent to your phone')
@@ -39,7 +41,7 @@ export const useLogin = () => {
     },
   })
 
-  const login = (payload: LoginFormValues) => {
+  const login = (payload: LoginFormValues & { lang: string }) => {
     setServerError('')
     mutate(payload)
   }

@@ -9,7 +9,8 @@ import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 
 export default function Login() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const lang = i18n.language?.startsWith('en') ? 'en' : 'ar'
   const { login, isPending, serverError } = useLogin()
 
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
@@ -19,6 +20,8 @@ export default function Login() {
 
   const fc = (hasError: boolean) =>
     `w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 ${hasError ? 'border-red-400' : ''}`
+
+  const handleLoginSubmit = (values: LoginFormValues) => login({ ...values, lang })
 
   return (
     <div className="min-h-screen bg-slate-50 py-16">
@@ -60,7 +63,7 @@ export default function Login() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit(login)} className="space-y-4" noValidate>
+              <form onSubmit={handleSubmit(handleLoginSubmit)} className="space-y-4" noValidate>
 
                 <div className="space-y-2">
                   <label className="text-sm font-semibold text-slate-900" htmlFor="phone">
@@ -70,7 +73,7 @@ export default function Login() {
                     <span className="flex items-center rounded-xl border border-slate-200 bg-slate-100 px-3 text-sm text-slate-500">
                       +966
                     </span>
-                    <Input id="phone" type="tel" placeholder="5XXXXXXXX"
+                    <Input id="phone" type="tel" placeholder={t('auth.login.phonePlaceholder', '5XXXXXXXX')}
                       className={fc(!!errors.phone)} {...register('phone')} />
                   </div>
                   {errors.phone && <p className="text-xs text-red-600">{errors.phone.message}</p>}

@@ -1,16 +1,19 @@
 import { useState, useRef } from 'react'
 import { useLocation, Navigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { useOtp } from '../hooks/useOtp'
 import { Button } from '../components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card'
 
 export default function VerifyOtp() {
     const location = useLocation()
+    const { t, i18n } = useTranslation()
     const phone = location.state?.phone as string | undefined
+    const lang = i18n.language?.startsWith('en') ? 'en' : 'ar'
 
     if (!phone) return <Navigate to="/login" replace />
 
-    const { activate, isPending, resend, isResending, serverError, resendMsg } = useOtp(phone)
+    const { activate, isPending, resend, isResending, serverError, resendMsg } = useOtp(phone, lang)
     const [digits, setDigits] = useState(['', '', '', ''])
     const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)]
 
@@ -42,9 +45,9 @@ export default function VerifyOtp() {
                         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
                             <span className="text-3xl">📱</span>
                         </div>
-                        <CardTitle className="text-2xl">Verify your number</CardTitle>
+                        <CardTitle className="text-2xl">{t('auth.verifyOtp.title')}</CardTitle>
                         <CardDescription>
-                            We sent a 4-digit code to <span className="font-semibold text-slate-800">+966 {phone}</span>
+                            {t('auth.verifyOtp.description', { phone })}
                         </CardDescription>
                     </CardHeader>
 
@@ -80,16 +83,16 @@ export default function VerifyOtp() {
                             onClick={handleSubmit}
                             disabled={isPending || digits.join('').length < 4}
                             className="w-full rounded-full py-3 text-base font-semibold disabled:opacity-70">
-                            {isPending ? 'Verifying…' : 'Verify'}
+                            {isPending ? t('auth.verifyOtp.verifying', 'Verifying…') : t('auth.verifyOtp.verify', 'Verify')}
                         </Button>
 
                         <p className="text-center text-sm text-slate-500">
-                            Didn't receive the code?{' '}
+                            {t('auth.verifyOtp.didntReceive', "Didn't receive the code?")}{' '}
                             <button
                                 onClick={() => resend()}
                                 disabled={isResending}
                                 className="font-semibold text-red-600 hover:text-red-700 disabled:opacity-50">
-                                {isResending ? 'Sending…' : 'Resend'}
+                                {isResending ? t('auth.verifyOtp.sending', 'Sending…') : t('auth.verifyOtp.resend', 'Resend')}
                             </button>
                         </p>
                     </CardContent>

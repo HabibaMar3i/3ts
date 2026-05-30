@@ -8,14 +8,14 @@ import { useAuthStore } from '../store/auth.store'
 
 type OtpError = AxiosError<{ msg?: string }>
 
-export const useOtp = (phone: string) => {
+export const useOtp = (phone: string, lang: string) => {
     const { setAuth } = useAuthStore()
     const navigate = useNavigate()
     const [serverError, setServerError] = useState('')
     const [resendMsg, setResendMsg] = useState('')
 
     const { mutate: activate, isPending } = useMutation({
-        mutationFn: (code: string) => activateApi({ phone, code }),
+        mutationFn: (code: string) => activateApi({ phone, code, lang }),
         onSuccess: (data: OtpResponse) => {
             if (data.key === 'success' && data.data) {
                 const { token, ...user } = data.data
@@ -36,7 +36,7 @@ export const useOtp = (phone: string) => {
     })
 
     const { mutate: resend, isPending: isResending } = useMutation({
-        mutationFn: () => resendCodeApi(phone),
+        mutationFn: () => resendCodeApi(phone, lang),
         onSuccess: (data) => {
             setResendMsg(data.msg)
             setServerError('')
