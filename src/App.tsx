@@ -52,6 +52,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import VerifyOtp from './pages/VerifyOtp'
 import ProtectedRoute from '#components/common/ProtectedRoute'
 import GuestRoute from '#components/common/GuestRoute'
+import Categories from './pages/Categories'
 
 const queryClient = new QueryClient()
 
@@ -92,6 +93,7 @@ function App() {
 
               {/* Public */}
               <Route index element={<Home />} />
+              <Route path="categories" element={<Categories />} />
               <Route path="about" element={<About />} />
               <Route path="services" element={<Services />} />
               <Route path="products" element={<Products />} />
