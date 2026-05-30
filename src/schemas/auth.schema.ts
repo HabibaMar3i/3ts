@@ -16,7 +16,7 @@ export type LoginFormValues = z.infer<typeof loginSchema>
 export const signupSchema = z.object({
     image: z.instanceof(File).optional(),
     name: z.string().min(1, 'Full name is required').max(50),
-    phone: z.string().min(1, 'Phone is required').regex(/^\d{9}$/, 'Must be 9 digits'),
+    phone: z.string().min(9).max(11).regex(/^\d+$/, 'Numbers only'),
     email: z.string().email('Invalid email').optional().or(z.literal('')),
     password: z.string().min(6).max(100),
     confirm: z.string().min(1, 'Please confirm your password'),

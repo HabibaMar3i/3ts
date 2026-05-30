@@ -6,6 +6,7 @@ export interface City {
 }
 
 export const getCitiesApi = async (): Promise<City[]> => {
-  const { data } = await axiosInstance.get<{ data: City[] }>('/cities')
-  return data.data
+  const { data } = await axiosInstance.get('/cities')
+  console.log('cities response:', data)
+  return data.data ?? []
 }

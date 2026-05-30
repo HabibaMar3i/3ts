@@ -60,6 +60,11 @@ export const signupApi = async (payload: SignupFormValues & { lat: number; lng: 
     form.append('device_id', getDeviceId())
     form.append('device_type', getDeviceType())
 
+    console.log('register payload:', Object.fromEntries(form))
     const { data } = await axiosInstance.post<SignupResponse>('/register', form)
+        .catch((error) => {
+            console.log('register error:', error.response?.data)
+            throw error
+        })
     return data
 }
