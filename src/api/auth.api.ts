@@ -1,11 +1,11 @@
 import { axiosInstance } from '../lib/axios'
 import { getDeviceId, getDeviceType } from '../lib/device'
 import type { SignupFormValues } from '../schemas/auth.schema'
+import type { LoginFormValues } from '../schemas/auth.schema'
 
 export interface LoginPayload {
     phone: string
     password: string
-    lang?: string
 }
 
 
@@ -24,12 +24,11 @@ export interface LoginResponse {
     }
 }
 
-export const loginApi = async (payload: LoginPayload): Promise<LoginResponse> => {
+export const loginApi = async (payload: LoginFormValues): Promise<LoginResponse> => {
     const form = new FormData()
     form.append('country_code', '966')
     form.append('phone', payload.phone)
     form.append('password', payload.password)
-    form.append('lang', payload.lang ?? 'en')
     form.append('device_id', getDeviceId())
     form.append('device_type', getDeviceType())
     console.log('login payload:', Object.fromEntries(form))
@@ -52,7 +51,6 @@ export interface SignupPayload {
     city: string
     password: string
     confirm: string
-    lang?: string
 }
 
 export interface SignupResponse {
@@ -68,7 +66,7 @@ export interface SignupResponse {
     }
 }
 
-export const signupApi = async (payload: SignupFormValues & { lat: number; lng: number; lang?: string }): Promise<SignupResponse> => {
+export const signupApi = async (payload: SignupFormValues & { lat: number; lng: number }): Promise<SignupResponse> => {
     const form = new FormData()
 
     if (payload.image) form.append('image', payload.image)
@@ -80,7 +78,6 @@ export const signupApi = async (payload: SignupFormValues & { lat: number; lng: 
     form.append('city_id', String(payload.city_id))
     form.append('lat', String(payload.lat))
     form.append('lng', String(payload.lng))
-    form.append('lang', payload.lang ?? 'en')
     form.append('map_desc', payload.map_desc)
     form.append('device_id', getDeviceId())
     form.append('device_type', getDeviceType())
@@ -109,11 +106,10 @@ export interface OtpResponse {
     }
 }
 
-export const activateApi = async (payload: { phone: string; code: string; lang?: string }): Promise<OtpResponse> => {
+export const activateApi = async (payload: { phone: string; code: string }): Promise<OtpResponse> => {
     const form = new FormData()
     form.append('phone', payload.phone)
     form.append('code', payload.code)
-    form.append('lang', payload.lang ?? 'en')
     form.append('country_code', '966')
     form.append('device_id', getDeviceId())
     form.append('device_type', getDeviceType())
@@ -122,10 +118,9 @@ export const activateApi = async (payload: { phone: string; code: string; lang?:
     return data
 }
 
-export const resendCodeApi = async (phone: string, lang: string = 'en'): Promise<{ key: string; msg: string }> => {
+export const resendCodeApi = async (phone: string): Promise<{ key: string; msg: string }> => {
     const form = new FormData()
     form.append('phone', phone)
-    form.append('lang', lang)
     form.append('country_code', '966')
 
     const { data } = await axiosInstance.post('/resend-code', form)

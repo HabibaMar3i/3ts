@@ -7,6 +7,7 @@ import { getCitiesApi } from '../api/cities.api'
 import type { SignupFormValues } from '../schemas/auth.schema'
 
 type SignupError = AxiosError<{ message?: string; errors?: Record<string, string[]> }>
+type SignupPayload = SignupFormValues & { lat: number; lng: number }
 
 export const useSignup = () => {
     const [serverError, setServerError] = useState('')
@@ -32,7 +33,7 @@ export const useSignup = () => {
         )
     }
 
-    const { mutate, isPending, isSuccess } = useMutation<SignupResponse, SignupError, SignupFormValues & { lat: number; lng: number; lang: string }>({
+    const { mutate, isPending, isSuccess } = useMutation({
         mutationFn: signupApi,
         onSuccess: (_data: SignupResponse) => {
             setServerError('')
@@ -47,7 +48,7 @@ export const useSignup = () => {
         },
     })
 
-    const signup = (payload: SignupFormValues & { lat: number; lng: number; lang: string }) => {
+    const signup = (payload: SignupFormValues) => {
         if (!coords) {
             setGeoError('Please get your location first')
             return
