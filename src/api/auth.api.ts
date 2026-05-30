@@ -126,3 +126,7 @@ export const resendCodeApi = async (phone: string): Promise<{ key: string; msg: 
     const { data } = await axiosInstance.post('/resend-code', form)
     return data
 }
+
+export const logoutApi = async (): Promise<void> => {
+    await axiosInstance.post(`/sign-out?device_id=${getDeviceId()}`)
+}
