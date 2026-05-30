@@ -1,17 +1,11 @@
 import { z } from 'zod'
 
 export const forgotPasswordPhoneSchema = z.object({
-    phone: z
-        .string()
-        .min(1, 'Phone number is required')
-        .regex(/^\+?[0-9\s\-()]{7,15}$/, 'Enter a valid phone number'),
+    phone: z.string().min(9).max(11).regex(/^\d+$/, 'Numbers only'),
 })
 
 export const forgotPasswordOtpSchema = z.object({
-    otp: z
-        .string()
-        .length(6, 'OTP must be 6 digits')
-        .regex(/^\d{6}$/, 'OTP must contain only digits'),
+    otp: z.string().length(4, 'OTP must be 4 digits').regex(/^\d{4}$/, 'OTP must contain only digits'),
 })
 
 export const resetPasswordSchema = z
