@@ -23,33 +23,15 @@ export default function Checkout() {
         register,
         handleSubmit,
         control,
-        setValue,
-        watch,
         formState: { errors },
     } = useForm<CheckoutFormValues>({
         resolver: zodResolver(checkoutSchema),
         defaultValues: {
             address: '',
-            latitude: 0,
-            longitude: 0,
             paymentMethod: 'wallet',
             notes: '',
         },
     })
-
-    const addressValue = watch('address')
-    const latitude = watch('latitude')
-    const longitude = watch('longitude')
-
-    const handleLocationSelect = (location: {
-        address: string
-        latitude: number
-        longitude: number
-    }) => {
-        setValue('address', location.address, { shouldValidate: true })
-        setValue('latitude', location.latitude, { shouldValidate: true })
-        setValue('longitude', location.longitude, { shouldValidate: true })
-    }
 
     const onSubmit = (values: CheckoutFormValues) => {
         confirmCheckout(values)
@@ -79,14 +61,7 @@ export default function Checkout() {
                         <div className="space-y-6 lg:col-span-2">
                             <CheckoutItemsList items={cartItems} />
 
-                            <CheckoutAddressSection
-                                register={register}
-                                errors={errors}
-                                addressValue={addressValue}
-                                latitude={latitude}
-                                longitude={longitude}
-                                onLocationSelect={handleLocationSelect}
-                            />
+                            <CheckoutAddressSection register={register} errors={errors} />
                             <CheckoutPaymentSection control={control} errors={errors} />
                             <CheckoutNotesSection register={register} />
                         </div>
